@@ -1,0 +1,614 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:screenOrientation="landscape"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    tools:context=".WReceiptLOActivity"
+    android:fillViewport="true">
+    
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin">
+	    
+	    <RelativeLayout
+	        android:id="@+id/relativeLayoutShowDetailsLO"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="#f2f2f2"
+	        android:gravity="fill_horizontal|top"
+	        android:padding="5dp" >
+	
+	        <TableLayout
+	            android:id="@+id/tableLayoutDetailsPO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:layout_marginLeft="10dp" >
+	
+	            <TableRow
+	                android:id="@+id/tableDetailsPORow1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblWHNReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:text="WH #:"
+	                    android:textSize="26sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblWHNReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="15dp"
+	                    android:text="0000000WH"
+	                    android:textSize="26sp" />
+	
+	                <TextView
+	                    android:id="@+id/lblPOReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="PO #:"
+	                    android:textSize="26sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblPOReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="15dp"
+	                    android:text="000000PO"
+	                    android:textSize="26sp" />
+	            </TableRow>
+	
+	        </TableLayout>
+			
+	        <Button
+	            android:id="@+id/buttonFinishWhReceiptLO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentTop="true"
+	            android:paddingLeft="10dp"
+	            android:paddingRight="10dp"
+	            android:text="Print Label"
+				android:textSize="24sp" />
+
+	        <Button
+	            android:id="@+id/btnTakePhotosLO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_toLeftOf="@+id/buttonFinishWhReceiptLO"
+	            android:paddingLeft="10dp"
+	            android:paddingRight="10dp"
+	            android:text="Take Photos"
+				android:textSize="24sp" />
+
+	        <Button
+	            android:id="@+id/Button_partialLabel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/btnTakePhotosLO"
+	            android:layout_alignBottom="@+id/btnTakePhotosLO"
+	            android:layout_toLeftOf="@+id/btnTakePhotosLO"
+	            android:paddingLeft="10dp"
+	            android:paddingRight="10dp"
+	            android:text="@string/partiallabel"
+	            android:textSize="24sp" />
+	
+	    </RelativeLayout>
+	    
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayoutShowDetailsWHLO"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/relativeLayoutShowDetailsLO"
+	        android:layout_below="@id/relativeLayoutShowDetailsLO"
+	        android:layout_marginTop="5dp"
+	        android:gravity="fill_horizontal|top"
+	        android:padding="5dp" >
+	        
+	        <TableLayout
+	            android:id="@+id/TableLayoutShowDetailsWHLO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:layout_marginLeft="10dp" >
+	
+	            <TableRow
+	                android:id="@+id/tableDetailsWHLORow1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblClientReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="Client:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblClientReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="CRISTAR S.A.S"
+	                    android:textSize="18sp" />
+	               
+	                <TextView
+	                    android:id="@+id/lblStatusReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center"
+	                    android:layout_marginLeft="18dp"
+	                    android:text="Status:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblStatusReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="In"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/editTextNumberPalletsHTLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="# Non HT Pallets:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	                
+	                <EditText
+	                    android:id="@+id/editTextNumberPalletsHTLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:ems="10"
+	                    android:hint="HT Pallets"
+	                    android:inputType="number" />
+	                
+	            </TableRow>
+	            
+	            <TableRow
+	                android:id="@+id/tableDetailsWHLORow2"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblSupplierReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="Supplier:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblSupplierReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="MERKAD MAKINA KALIP S.A"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblEnteredByReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="Entered By:"
+	                    android:layout_marginLeft="18dp"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblEnteredByReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="Jennier Espina"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/editTextRemarksLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="Remarks:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	                
+	                <EditText
+	                    android:id="@+id/editTextRemarksLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:ems="10"
+	                    android:hint="Remarks"
+	                    android:inputType="textMultiLine" />
+	               
+	                
+	            </TableRow>
+	            
+	            <TableRow
+	                android:id="@+id/tableDetailsWHLORow3"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblDateReceiptLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center_vertical"
+	                    android:text="Date:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblDateReceiptLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="2013/10/21 10:41:22 am"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/txtAutoTruckCompanyLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right|center|center_vertical"
+	                    android:layout_marginLeft="18dp"
+	                    android:text="Truck Company:"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <AutoCompleteTextView
+	                    android:id="@+id/txtAutoTruckCompany"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:ems="10"
+	                    android:hint="Truck Company"
+	                    android:textSize="18sp"
+	                    android:width="250dp" />
+	                
+	            </TableRow>
+	            
+	        </TableLayout>
+	        
+	    </RelativeLayout>
+	    
+	    <!--  div bar  -->
+	
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayoutDivLine1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/RelativeLayoutShowDetailsWHLO"
+	        android:layout_marginTop="10dp"
+	        android:background="@android:color/transparent"
+	        android:gravity="fill_horizontal|top"
+	        android:minHeight="3dp" >
+
+	        <Button
+	            android:id="@+id/btnAddItemWhLO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:paddingLeft="30dp"
+	            android:paddingRight="30dp"
+	            android:text="Add Item"
+	            android:textSize="28sp" />
+
+			<Button
+                android:id="@+id/Button_ups"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/ups"
+                android:textSize="28sp"
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@+id/Button_fedex"
+				android:layout_toStartOf="@+id/Button_fedex" />
+
+			<Button
+                android:id="@+id/Button_fedex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/fedex"
+                android:textSize="28sp"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentEnd="true" />
+
+		</RelativeLayout>
+	    
+	    
+	    <!--  table list items cargo  -->
+	    
+	    <TableLayout
+	        android:id="@+id/tblItemListLO"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/RelativeLayoutDivLine1"
+	        android:layout_below="@+id/RelativeLayoutDivLine1"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginTop="20dp" >
+	        
+	    </TableLayout>
+	    
+	    
+	    <!-- results table  -->
+		<!-- 
+	    <RelativeLayout
+	        android:id="@+id/RelativeLayoutShowResultsWHLO"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/relativeLayoutShowDetailsLO"
+	        android:layout_below="@id/tblItemListLO"
+	        android:layout_marginTop="15dp"
+	        android:background="#f2f2f2"
+	        android:gravity="fill_horizontal|top"
+	        android:minHeight="30dp"
+	        android:minWidth="1230dp"
+	        android:padding="5dp" >
+	        
+	        <TableLayout
+	            android:id="@+id/TableLayoutShowResultsWHLO"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:layout_marginLeft="80dp"
+	            android:layout_marginRight="80dp"
+	            android:stretchColumns="1,2,3,4,5,6,7" >
+				
+	            <TableRow
+	                android:id="@+id/tableResultsWHLORow0"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginBottom="7dp" >
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightLBLOTitle"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_span="2"
+	                    android:gravity="center"
+	                    android:text="Total Real Weight"
+	                    android:textSize="20sp"
+	                    android:textStyle="bold" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirVolWeightLBLOTitle"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_span="2"
+	                    android:gravity="center"
+	                    android:text="Total Air Vol Weight"
+	                    android:textSize="20sp"
+	                    android:textStyle="bold" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanVolWeightLBLOTitle"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_span="2"
+	                    android:gravity="center"
+	                    android:text="Total Ocean Vol Weight"
+	                    android:textSize="20sp"
+	                    android:textStyle="bold" />
+	
+	            </TableRow>
+	            
+	            <TableRow
+	                android:id="@+id/tableResultsWHLORow1"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightLBLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:text="[LB]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightLBLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="1"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirVolWeightLBLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="VOL WT[LB]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirVolWeightLBLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0.04"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanVolWeightFtLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="VOL[FT3]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanVolWeightFtLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0"
+	                    android:textSize="18sp" />
+	            </TableRow>
+	            <TableRow
+	                android:id="@+id/tableResultsWHLORow2"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightKGLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:text="[KG]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightKGLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="1"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirVolWeightKGLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="VOL WT[KG]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirVolWeightKGLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0.04"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanVolWeightM2LOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="VOL[m2]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanVolWeightM2LO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0"
+	                    android:textSize="18sp" />
+	            </TableRow>
+	            <TableRow
+	                android:id="@+id/tableResultsWHLORow3"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content" >
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightTONLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:text="[TON]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalRealWeightTONLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="1"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirRealWeightKGLOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="REAL WT[KG]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalAirRealWeightKGLO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0.04"
+	                    android:textSize="18sp" />
+	                
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanRealWeightM2LOLabel"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="right"
+	                    android:layout_marginLeft="20dp"
+	                    android:text="REAL[TON]"
+	                    android:textSize="18sp"
+	                    android:textStyle="bold" />
+	
+	                <TextView
+	                    android:id="@+id/lblItemsTotalOceanRealWeightM2LO"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="10dp"
+	                    android:text="0"
+	                    android:textSize="18sp" />
+	            </TableRow>
+	            
+	        </TableLayout>
+	
+	    </RelativeLayout>
+	     -->
+	
+	</RelativeLayout>
+</ScrollView>

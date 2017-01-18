@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lotrading.controlwhapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
+        android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:icon="@drawable/ic_launcher_custom"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:screenOrientation="landscape"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.lotrading.controlwhapp.SplashActivity"
+            android:label="@string/title_app" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.HomeActivity"
+            android:label="@string/title_app" >
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.FilterCargoActivity"
+            android:label="@string/title_app" >
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.WReceiptLOActivity"
+            android:label="@string/title_app" >
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.MainActivity"
+            android:label="@string/title_app" >
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.TakePhotoActivity"
+            android:label="@string/title_app" >
+        </activity>
+        <activity
+            android:name="com.lotrading.controlwhapp.PanePrintActivity"
+            android:label="@string/title_app" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\httpclient-4.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="0171c67fa04952e76bc9ee1e578fe629db35d769">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\httpclient-4.3.1_85e2777315f6bbb4820d9e7244ded46cbf1809d1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="3e8b78e93f26c4968fce3f9e24a030f37f252ed7">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_2a43758fcb6bcdea7bd6095a1fc38fc1aba8e37a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\opencsv-2.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f1231104847b1132a07c54c7db8a823ef7923f7c">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\opencsv-2.2_185962611e0065dccde1743566a8059bdfa850da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\httpmime-4.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="f49e2348b768a7199e021a97e951df25cd5fb714">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\httpmime-4.3.1_86275854dbec7074a398fc667a6b98896707c7e7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\ZSDK_ANDROID_API.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="8811ec38f1a308283312fef9a1e305725fedcafc">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\ZSDK_ANDROID_API_75453b323bf920052d05ca5ce75d6e1ba4891ea7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\commons-net-3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2298164a7c2484406f2aa5ac85b205d39019896f">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\commons-net-3.1_06884ede55718d1c8cbde52047064d2823e58387.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_2686daca031846f1c21ac29bdd63f71945b20d67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\apache-mime4j-core-0.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a81264fe0265ebe8fd1d8128aad06dc320de6eef">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\apache-mime4j-core-0.7.2_2f17b3ad0eca1d4938a867564c87e1edb61ce13e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\snmp6_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="0bca89e1d2d15cd384cc8aa6cef9940fb9ad6469">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\snmp6_1_ff75548051af39cee0705fc378ec6a81094e587e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\commons-io-2.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="83b5b8a7ba1c08f9e8c8ff2373724e33d3c1e22a">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\commons-io-2.2_c3c01e0f2cbc7ba58f9c3f78b38c54428bd4dede.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\daniel\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.7.5\7a15a7db50f86c4b64aa3367424a60e3a325b8f1\okhttp-2.7.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="7a15a7db50f86c4b64aa3367424a60e3a325b8f1">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\okhttp-2.7.5_6c2eff2c7d492fb08cb66e661eb4b591dd518244.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\daniel\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.9.0\a681c044244d9fc375198588297a39ba78028423\retrofit-1.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\retrofit-1.9.0_60ff2c914c46e64678bd7cf30dbb136a18c29573.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\httpcore-4.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="8dfd6286d04ad9dbf26cdf7d4ef5c8fad430cf30">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\httpcore-4.3_c834e67a7ff4142621314f339423238de8126f8f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\libs\BASE64Decoder.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="acd93e3727886196f9b8434279ff445ba8611186">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\BASE64Decoder_6701c50f75c58c8b5cce2f7f728460683b3f6ec4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1ccfe53d71638d0d33b54ec37b1ad5958c1c0218">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\instant-run_2237b133e724a4fc58ba065bdde3323392b9c136.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\daniel\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_e324c585ce3cbbdb481ef8ac6f1291ab8313ef6a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\daniel\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\okio-1.6.0_20be2f5ca6962aebdd626dfbd58744558f70a9a4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_112852983c101dc1ffe6c262afc5339e73c04335.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\daniel\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\gson-2.3.1_6b523e451c6941f7995640c2f92a1d8509ce4bc5.jar" />
+    </item>
+
+</items>

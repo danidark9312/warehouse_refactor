@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:screenOrientation="landscape"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    tools:context=".SplashActivity" >
+
+    <TableLayout
+        android:id="@+id/tableLayoutSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp" >
+
+        <TableRow
+            android:id="@+id/tableSplashRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/lableSplashTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Warehouse Control"
+                android:textColor="@android:color/holo_blue_light"
+                android:textStyle="bold"
+                android:textSize="45sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableSplashRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageViewSplashImageLogo"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/splash_screen_9" />
+
+        </TableRow>
+        
+        
+        <TableRow
+            android:id="@+id/tableSplashRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

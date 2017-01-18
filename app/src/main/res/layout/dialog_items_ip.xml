@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="landscape" >
+
+    <ScrollView android:id="@+id/scroll_items"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                 android:layout_alignLeft="@+id/relativeInfoIPDialog"
+        android:layout_alignRight="@+id/relativeInfoIPDialog"
+        android:layout_below="@+id/relativeInfoIPDialog"
+         android:layout_marginTop="20dp"
+                 >
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTableEachItemsIPDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+                 android:layout_alignParentRight="true"
+       
+        android:background="#f5f5f8" >
+
+        
+           
+        <TableLayout
+            android:id="@+id/tableLayoutItemsListIPDialog"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" >
+
+        </TableLayout>
+        
+    </RelativeLayout>
+    </ScrollView>
+    
+    
+    
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutBoderBottonDialogIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scroll_items"
+        android:layout_marginTop="22dp"
+        android:background="#D8D8D8"
+        android:minHeight="3dp" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeInfoIPDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TableLayout
+            android:id="@+id/tableLayoutInfoTopIPDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/tableLayoutInfoTopIPDialogRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textViewPOIPLabelDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:text="P.O. Number:"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewPOIPValueDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:text="00000"
+                    android:textSize="22sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableLayoutInfoTopIPDialogRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textViewSupplierIPLabelDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:text="Supplier:"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewSupplierIPValueDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:text="supplier name"
+                    android:textSize="22sp" />
+            </TableRow>
+        </TableLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutButtonsIPDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/tableLayoutInfoTopIPDialog">
+
+            <Button
+                android:id="@+id/ButtonContinueIPReceiptDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="Save"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonTakePhotosIPDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="22dp"
+                android:layout_toLeftOf="@+id/ButtonContinueIPReceiptDialog"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="Take Photos"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonUpdateItemsIPDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="22dp"
+                android:layout_toLeftOf="@+id/buttonTakePhotosIPDialog"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="Update Order"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/Button_partialLabel_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                 android:layout_marginRight="22dp"
+                android:layout_toLeftOf="@+id/buttonUpdateItemsIPDialog"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/partiallabel"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
