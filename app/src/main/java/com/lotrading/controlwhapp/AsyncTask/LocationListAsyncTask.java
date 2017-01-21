@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.lotrading.controlwhapp.WReceiptLOActivity;
-import com.lotrading.controlwhapp.model.MasterValuesResponse;
+import com.lotrading.controlwhapp.model.Location;
 import com.lotrading.controlwhapp.service.GeneralServices;
 import com.lotrading.controlwhapp.servicesError.RepositoryError;
 import com.lotrading.controlwhapp.servicesError.RepositoryMapper;
@@ -14,19 +14,19 @@ import java.util.List;
 
 import retrofit.RetrofitError;
 
-public class MasterValuesAsyncTask extends AsyncTask<String, Integer, Boolean> {
+public class LocationListAsyncTask extends AsyncTask<String, Integer, Boolean> {
 
 		private ProgressDialog Asycdialog = null;
 		WReceiptLOActivity filterCargoActivity = null;
 		RepositoryError repositoryError = null;
 		GeneralServices generalServices = null;
-		List<MasterValuesResponse> masterValues;
+		List<Location> locations;
 		int masterId;
 
-	public MasterValuesAsyncTask(int masterId,GeneralServices generalServices, WReceiptLOActivity cargoActivity) {
+	public LocationListAsyncTask(GeneralServices generalServices, WReceiptLOActivity cargoActivity) {
 			this.generalServices = generalServices;
 			this.filterCargoActivity = cargoActivity;
-			this.masterId = masterId;
+
 		}
 
 		@Override
@@ -45,8 +45,9 @@ public class MasterValuesAsyncTask extends AsyncTask<String, Integer, Boolean> {
 			boolean result = true;
 
 			try {
-				masterValues = generalServices.getMasterValues(String.valueOf(masterId));
-				result = (masterValues != null);
+
+				locations = generalServices.getLocationList();
+				result = (locations != null);
 
 			} catch(RetrofitError er) {
 				repositoryError = RepositoryMapper.convertRetrofitErrorToRepositoryError(er);
@@ -66,7 +67,7 @@ public class MasterValuesAsyncTask extends AsyncTask<String, Integer, Boolean> {
 		}
 		
 		private void callbackService(){
-			filterCargoActivity.callbackGetListUnitType(masterValues);
+			filterCargoActivity.callbackGetListLocations(locations);
 		}
 		
 	}//end asyn task

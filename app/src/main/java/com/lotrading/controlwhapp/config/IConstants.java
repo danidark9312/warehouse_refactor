@@ -5,7 +5,7 @@ package com.lotrading.controlwhapp.config;
  */
 
 public interface IConstants {
-    String URL_PRODUCCION = "http://10.2.2.6:8099/warehouseWS";
+    String URL_PRODUCCION = "http://10.2.2.6:8084/warehouseWS";
     String ERROR_REQUEST_TIMEOUT_MESSAGE = "La solicitud está tardando demasiado. Por favor inténtalo nuevamente.";
     String ERROR_DEFAULT_MESSAGE = "Ha ocurrido un error, inténtalo en unos minutos.";
     String ERROR_UNAUTHORIZED_MESSAGE = "El usuario no se encuentra autorizado en la aplicación";

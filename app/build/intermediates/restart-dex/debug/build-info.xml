@@ -5,22 +5,22 @@
     density="mdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="171093046244772"
+    timestamp="98755930780227"
     token="-1772788141766956511"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="1891" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="322" />
     <task
         name="verifier"
-        duration="0" />
+        duration="46" />
 
     <artifact
         location="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\outputs\apk\app-debug.apk"

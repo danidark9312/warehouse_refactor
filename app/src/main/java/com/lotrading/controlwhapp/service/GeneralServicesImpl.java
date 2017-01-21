@@ -6,6 +6,7 @@ import com.lotrading.controlwhapp.client.GeneralClient;
 import com.lotrading.controlwhapp.client.HTTPResponse;
 import com.lotrading.controlwhapp.config.IConstants;
 import com.lotrading.controlwhapp.model.Client;
+import com.lotrading.controlwhapp.model.Location;
 import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.model.Supplier;
 import com.lotrading.controlwhapp.model.TruckCompany;
@@ -46,6 +47,12 @@ public class GeneralServicesImpl implements GeneralServices {
         HTTPResponse<List<TruckCompany>> response = generalClient.getTruckCompanies();
         List<TruckCompany> suppliers = response.getWrappedResponse();
         return suppliers;
+    }
+
+    public List<Location> getLocationList(){
+        HTTPResponse<List<Location>> locationsList = generalClient.getLocationsList();
+        List<Location> wrappedResponse = locationsList.getWrappedResponse();
+        return wrappedResponse;
     }
 
 

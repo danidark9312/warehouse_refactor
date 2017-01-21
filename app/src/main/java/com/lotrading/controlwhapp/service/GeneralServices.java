@@ -1,6 +1,7 @@
 package com.lotrading.controlwhapp.service;
 
 import com.lotrading.controlwhapp.model.Client;
+import com.lotrading.controlwhapp.model.Location;
 import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.model.Supplier;
 import com.lotrading.controlwhapp.model.TruckCompany;
@@ -16,4 +17,5 @@ public interface GeneralServices {
     List<Client> getListClients(String query);
     List<TruckCompany> getTruckCompanies();
     List<MasterValuesResponse> getMasterValues(String masterId);
+    List<Location> getLocationList();
 }

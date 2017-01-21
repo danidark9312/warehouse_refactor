@@ -1,7 +1,10 @@
 package com.lotrading.controlwhapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Location{
 
+	@SerializedName("id")
 	private String whReceiptItemLocationId;
 	private String loc;
 	private String pc;

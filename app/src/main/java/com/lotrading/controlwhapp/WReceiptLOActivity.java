@@ -11,12 +11,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.lotrading.controlwhapp.AsyncTask.LocationListAsyncTask;
 import com.lotrading.controlwhapp.AsyncTask.MasterValuesAsyncTask;
 import com.lotrading.controlwhapp.AsyncTask.TruckCompaniesAsyncTask;
 import com.lotrading.controlwhapp.config.IConstants;
 import com.lotrading.controlwhapp.control.ControlApp;
 import com.lotrading.controlwhapp.control.ControlWhReceipt;
 import com.lotrading.controlwhapp.exception.WeightException;
+import com.lotrading.controlwhapp.model.Location;
 import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.model.ModelCarrier;
 import com.lotrading.controlwhapp.model.ModelItemIndustrialPurchase;
@@ -140,9 +142,10 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				if (isSavedIP == false) {
 					createDialogIndustrialPurcharse();
 				}
-			}// else{ //lo }
-	}
+			}
 
+
+			}// else{ //lo }
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -200,7 +203,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 
 	}
 
-	private void 	loadTableItemsWh() {
+	private void loadTableItemsWh() {
 
 			ArrayList<ModelItemWhReceipt> listItemsWh = ControlApp
 					.getInstance().getControlWhReceipt().getModelWhReceipt()
@@ -1191,7 +1194,6 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					createPartialDialogLabels();
 				}
 
@@ -3606,8 +3608,11 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				ModelService objService = new ModelService(service, params,
 						callback, loadingMessage);
 
-				TaskAsynCallService callServiceTask = new TaskAsynCallService();
-				callServiceTask.execute(objService);
+				/*TaskAsynCallService callServiceTask = new TaskAsynCallService();
+				callServiceTask.execute(objService);*/
+
+				new LocationListAsyncTask(GeneralServicesImpl.getServicesInstance(),this).execute();
+
 			} else {
 				loadDataAutoLocations(); // dialog always is destroyed so,
 				// should be loaded again
@@ -3641,22 +3646,16 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void callbackGetListLocations(JSONObject jsonResponse) {
-		try {
-			JSONArray data = new JSONArray(jsonResponse.getString("result"));
-			for (int i = 0; i < data.length(); i++) {
-				JSONObject eachClientResponse = data.getJSONObject(i);
-				String location = eachClientResponse.getString("lc");
-				int id = eachClientResponse.getInt("id");
+	public void callbackGetListLocations(List<Location> locations) {
+			for (Location location : locations) {
+
+				String strLocation = location.getLoc();
+				int id = Integer.parseInt(location.getWhReceiptItemLocationId());
 				ControlApp.getInstance().getControlListLocations()
-						.addLocation(new ModelLocation(location, id));
+						.addLocation(new ModelLocation(strLocation, id));
 			}
 			loadDataAutoLocations();
-		} catch (JSONException ex) {
-			Log.e("WhReceiptLOActivity",
-					"Error parsing json in method callbackGetListUnitType ", ex);
-		}
-	}
+			}
 	private void callbackGetListLocationsInflate(JSONObject jsonResponse) {
 		try {
 			JSONArray data = new JSONArray(jsonResponse.getString("result"));
@@ -3875,7 +3874,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			} else if (serviceCallback.equals("callbackGetListUnitType")) {
 				//callbackGetListUnitType(respJSON);
 			} else if (serviceCallback.equals("callbackGetListLocations")) {
-				callbackGetListLocations(respJSON);
+				//callbackGetListLocations(respJSON);
 
 			} else if (serviceCallback.equals("callbackGetListLocationsInflate")) {
 				callbackGetListLocationsInflate(respJSON);

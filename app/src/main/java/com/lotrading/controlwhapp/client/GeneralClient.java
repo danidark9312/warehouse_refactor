@@ -2,6 +2,7 @@ package com.lotrading.controlwhapp.client;
 
 
 import com.lotrading.controlwhapp.model.Client;
+import com.lotrading.controlwhapp.model.Location;
 import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.model.Supplier;
 import com.lotrading.controlwhapp.model.TruckCompany;
@@ -32,6 +33,9 @@ public interface GeneralClient {
 
     @GET("/general/getMasterValues")
     HTTPResponse<List<MasterValuesResponse>> getMasterValue(@Query("masterId") String masterId);
+
+    @GET("/general/getLocationsList")
+    HTTPResponse<List<Location>> getLocationsList();
 
 }
 
