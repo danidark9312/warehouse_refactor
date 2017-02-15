@@ -22,10 +22,12 @@ public class LocationListAsyncTask extends AsyncTask<String, Integer, Boolean> {
 		GeneralServices generalServices = null;
 		List<Location> locations;
 		int masterId;
+		boolean isForPopup;
 
-	public LocationListAsyncTask(GeneralServices generalServices, WReceiptLOActivity cargoActivity) {
+	public LocationListAsyncTask(GeneralServices generalServices, WReceiptLOActivity cargoActivity,boolean isForPopup) {
 			this.generalServices = generalServices;
 			this.filterCargoActivity = cargoActivity;
+			this.isForPopup = isForPopup;
 
 		}
 
@@ -67,7 +69,10 @@ public class LocationListAsyncTask extends AsyncTask<String, Integer, Boolean> {
 		}
 		
 		private void callbackService(){
-			filterCargoActivity.callbackGetListLocations(locations);
+		if(isForPopup)
+				filterCargoActivity.callbackGetListLocationsInflate(locations);
+			else
+				filterCargoActivity.callbackGetListLocations(locations);
 		}
 		
 	}//end asyn task

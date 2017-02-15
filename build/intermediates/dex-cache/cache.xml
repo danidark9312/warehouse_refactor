@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="3e8b78e93f26c4968fce3f9e24a030f37f252ed7">
+        sha1="55113bf8bcf3bd33255fa857535d311d6bc121a6">
         <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_2a43758fcb6bcdea7bd6095a1fc38fc1aba8e37a.jar" />
     </item>
     <item
@@ -133,7 +133,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="1ccfe53d71638d0d33b54ec37b1ad5958c1c0218">
+        sha1="5edbb4234da8104438ba053131f984c06188a425">
         <dex dex="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\intermediates\pre-dexed\debug\instant-run_2237b133e724a4fc58ba065bdde3323392b9c136.jar" />
     </item>
     <item

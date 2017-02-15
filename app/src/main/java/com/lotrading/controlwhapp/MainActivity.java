@@ -83,6 +83,9 @@ public class MainActivity extends AbstractActivity implements OnClickListener {
 		case R.id.btnLogin:
 			String username = (etUsername).getText().toString();
 			String password = (etPassword).getText().toString();
+			if(username.equals("") || password.equals("")){
+				return;
+			}
 			checkLogin(username, password);
 			break;
 		}

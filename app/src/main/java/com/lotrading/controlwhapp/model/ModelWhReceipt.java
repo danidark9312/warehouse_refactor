@@ -3,6 +3,7 @@ package com.lotrading.controlwhapp.model;
 import java.util.ArrayList;
 
 import com.lotrading.controlwhapp.config.Config;
+import com.lotrading.controlwhapp.config.IConstants;
 
 public class ModelWhReceipt {
 	
@@ -77,7 +78,7 @@ public class ModelWhReceipt {
 		truckCompany = new ModelCarrier(0, ""); //empty truck company
 		remarks = "";
 		htPallets = -1;
-		urlLabelBase = Config.SERVER_IP + "/ControlWarehouse/file-system/WH-RECEIPTS/";
+		urlLabelBase = IConstants.URL_PRODUCCION + "/warehouse/";
 
 		this.isSavedIP = false;
 		this.isSavedRM = false;

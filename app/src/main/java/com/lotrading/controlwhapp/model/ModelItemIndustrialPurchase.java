@@ -4,18 +4,18 @@ public class ModelItemIndustrialPurchase {
 	
 	private int idItem;
 	private int itemNumber;
-	private int quantity;
+	private double quantity;
 	private String productClientDesciption;
 	private String productClientRef;
 	private String productSupplierDescription;
 	private String productSupplierRef;
 	private int idUnitType;
 	private String unitType;
-	private int idProduct;
+	private String idProduct;
 	private String productName;
 	private String manufacturerRef;
-	private int qtyArrived;
-	private int qtyEntered;
+	private double qtyArrived;
+	private double qtyEntered;
 	private String remarks;
 	
 	
@@ -37,8 +37,8 @@ public class ModelItemIndustrialPurchase {
 	public ModelItemIndustrialPurchase(int idItem, int itemNumber, int quantity,
 			String productClientDesciption, String productClientRef,
 			String productSupplierDescription, String productSupplierRef,
-			int idUnitType, String unitType, int idProduct, String productName,
-			String manufacturerRef, int qtyArrived) {
+			int idUnitType, String unitType, String idProduct, String productName,
+			String manufacturerRef, double qtyArrived) {
 		this.idItem = idItem;
 		this.itemNumber = itemNumber;
 		this.quantity = quantity;
@@ -91,12 +91,6 @@ public class ModelItemIndustrialPurchase {
 		this.itemNumber = itemNumber;
 	}
 
-	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
 
 	/**
 	 * @param quantity the quantity to set
@@ -192,14 +186,14 @@ public class ModelItemIndustrialPurchase {
 	/**
 	 * @return the idProduct
 	 */
-	public int getIdProduct() {
+	public String getIdProduct() {
 		return idProduct;
 	}
 
 	/**
 	 * @param idProduct the idProduct to set
 	 */
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(String idProduct) {
 		this.idProduct = idProduct;
 	}
 
@@ -232,24 +226,34 @@ public class ModelItemIndustrialPurchase {
 	}
 
 	/**
-	 * @return the qtyArrived
-	 */
-	public int getQtyArrived() {
-		return qtyArrived;
-	}
-
-	/**
 	 * @param qtyArrived the qtyArrived to set
 	 */
 	public void setQtyArrived(int qtyArrived) {
 		this.qtyArrived = qtyArrived;
 	}
 
-	/**
-	 * @return the qtyEntered
-	 */
-	public int getQtyEntered() {
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getQtyArrived() {
+		return qtyArrived;
+	}
+
+	public void setQtyArrived(double qtyArrived) {
+		this.qtyArrived = qtyArrived;
+	}
+
+	public double getQtyEntered() {
 		return qtyEntered;
+	}
+
+	public void setQtyEntered(double qtyEntered) {
+		this.qtyEntered = qtyEntered;
 	}
 
 	/**

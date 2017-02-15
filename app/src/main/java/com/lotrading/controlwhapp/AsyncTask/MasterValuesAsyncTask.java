@@ -1,9 +1,11 @@
 package com.lotrading.controlwhapp.AsyncTask;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.lotrading.controlwhapp.PanePrintActivity;
 import com.lotrading.controlwhapp.WReceiptLOActivity;
 import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.service.GeneralServices;
@@ -17,22 +19,23 @@ import retrofit.RetrofitError;
 public class MasterValuesAsyncTask extends AsyncTask<String, Integer, Boolean> {
 
 		private ProgressDialog Asycdialog = null;
-		WReceiptLOActivity filterCargoActivity = null;
+		//WReceiptLOActivity activity = null;
+		Activity activity = null;
 		RepositoryError repositoryError = null;
 		GeneralServices generalServices = null;
 		List<MasterValuesResponse> masterValues;
 		int masterId;
 
-	public MasterValuesAsyncTask(int masterId,GeneralServices generalServices, WReceiptLOActivity cargoActivity) {
+	public MasterValuesAsyncTask(int masterId,GeneralServices generalServices, Activity cargoActivity) {
 			this.generalServices = generalServices;
-			this.filterCargoActivity = cargoActivity;
+			this.activity = cargoActivity;
 			this.masterId = masterId;
 		}
 
 		@Override
         protected void onPreExecute() {
             //set message of the dialog
-			Asycdialog = new ProgressDialog(this.filterCargoActivity);
+			Asycdialog = new ProgressDialog(this.activity);
             Asycdialog.setMessage("Loading");
             Asycdialog.setCancelable(false);
 			Asycdialog.setCanceledOnTouchOutside(false);
@@ -59,14 +62,17 @@ public class MasterValuesAsyncTask extends AsyncTask<String, Integer, Boolean> {
 			if(result){
 				callbackService();
 			}else{
-				Toast.makeText(filterCargoActivity,"Error calling operation web service", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity,"Error calling operation web service", Toast.LENGTH_SHORT).show();
 			}
 			Asycdialog.dismiss();
 			super.onPostExecute(result);
 		}
 		
 		private void callbackService(){
-			filterCargoActivity.callbackGetListUnitType(masterValues);
+			if(activity instanceof WReceiptLOActivity){
+				((WReceiptLOActivity)activity).callbackGetListUnitType(masterValues);
+			}else if(activity instanceof PanePrintActivity)
+				((PanePrintActivity)activity).callbackGetListPrinters(masterValues);
 		}
 		
 	}//end asyn task

@@ -200,7 +200,13 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 		try{
 			int idDepatment = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdDep();
 			//Toast.makeText(this, "idDepartment: "+idDepatment, Toast.LENGTH_LONG).show();
-			callServiceCreateWarehouseReceipt();
+			String idEmployeeEntered = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdEmployeeEntered();
+			if(idEmployeeEntered == "0"){
+				sendToLogin();
+			}else{
+				callServiceCreateWarehouseReceipt();
+			}
+
 		}catch(Exception e){
 			Log.e("FilterActivity", "Error in method  launchWhReceipt ", e);
 		}
@@ -213,15 +219,15 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 
 			Warehouse warehouse = new Warehouse();
 
-			warehouse.setIdPo(whReceiptObj.getIdPODepartment());
-			warehouse.setIdDepartment(String.valueOf(whReceiptObj.getIdDep()));
+			warehouse.setIdPo(Integer.valueOf(whReceiptObj.getIdPODepartment()));
+			warehouse.setIdDepartment(Integer.valueOf(String.valueOf(whReceiptObj.getIdDep())));
 			warehouse.setPoNumber(whReceiptObj.getPo());
-			warehouse.setIdSupplier(String.valueOf(whReceiptObj.getIdSupplier()));
-			warehouse.setIdClient(String.valueOf(whReceiptObj.getIdClient()));
-			warehouse.setIdEmployee(whReceiptObj.getIdEmployeeEntered());
+			warehouse.setIdSupplier(Integer.valueOf(String.valueOf(whReceiptObj.getIdSupplier())));
+			warehouse.setIdClient(Integer.valueOf(String.valueOf(whReceiptObj.getIdClient())));
+			warehouse.setIdEmployee(Integer.valueOf(whReceiptObj.getIdEmployeeEntered()));
 			warehouse.setDateReceipt(whReceiptObj.getDateTimeReceived());
-			warehouse.setIdGroup(String.valueOf(whReceiptObj.getIdDep()));
-			warehouse.setIdStatus(String.valueOf(whReceiptObj.getStatus()));
+			warehouse.setIdGroup(Integer.valueOf(String.valueOf(whReceiptObj.getIdDep())));
+			warehouse.setIdStatus(Integer.valueOf(String.valueOf(whReceiptObj.getStatus())));
 
 			String service = "ServiceWhReceipt"; 
 			//Log.e("Departamento","ID: "+whReceiptObj.getIdDep());
@@ -256,10 +262,9 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 	public void callbackCreateWarehouseReceipt(Warehouse warehouse){
 		try{
 
-
-
-
 			String idWhReceipt = warehouse.getWhReceiptId();
+
+
 			String whReceiptNumber= warehouse.getWhReceiptNumber();
 			if(!idWhReceipt.equals("0")){ //was created successfully
 				String dateTimeReceived = warehouse.getDateReceipt();
@@ -274,11 +279,11 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 				switch (idDepatment) {
 				case 2://rm
 					for(WarehouseItem warehouseItem : wareHouseItems){
-						int idItem = Integer.parseInt(warehouseItem.getIdItem());
+						int idItem = (warehouseItem.getIdItem());
 						int itemNumber = Integer.parseInt(warehouseItem.getItemNumber());
 						double quantity = warehouseItem.getQuantity();
 						String productName = warehouseItem.getProductName();
-						String productCode = warehouseItem.getIdProduct();
+						String productCode = String.valueOf(warehouseItem.getIdProduct());
 						int orderToPlaceItemId = Integer.parseInt(warehouseItem.getOrderToPlaceItemId());
 						String unit = warehouseItem.getUnitType();
 						boolean isHazardous = warehouseItem.getHazardaous()=="1";
@@ -294,19 +299,19 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 				case 3: //ip  
 
 					for(WarehouseItem warehouseItem : wareHouseItems){
-						int idItem = Integer.parseInt(warehouseItem.getIdItem());
+						int idItem = (warehouseItem.getIdItem());
 						int itemNumber = Integer.parseInt(warehouseItem.getItemNumber());
 						double quantity = warehouseItem.getQuantity();
 						String productClientDesciption = warehouseItem.getClientDescription();
 						String productClientRef = warehouseItem.getClientRef();
 						String productSupplierDescription = warehouseItem.getSupplierDescription();
 						String productSupplierRef = warehouseItem.getSupplierRef();
-						String idUnitType = warehouseItem.getIdUnitType();
+						String idUnitType = String.valueOf(warehouseItem.getIdUnitType());
 						String unitType = warehouseItem.getUnitType();
-						int idProduct = Integer.parseInt(warehouseItem.getIdProduct());
+						String idProduct = (warehouseItem.getIdProduct());
 						String productName = warehouseItem.getProductName();
 						String manufacturerRef = warehouseItem.getManufacturerRef();
-						int qtyArrived = warehouseItem.getQuantityArrived();
+						double qtyArrived = warehouseItem.getQuantityArrived();
 						//create each object for show popup in next activity
 						Log.d("item data", "itemNumber: "+itemNumber+" supplierDesc:."+productSupplierDescription+" dupplier reference: "+
 								productSupplierRef+"client descripcion:. "+productClientDesciption+" client reference: "+productClientRef+"qty: "+
@@ -796,6 +801,12 @@ public class FilterCargoActivity extends AbstractActivity implements OnClickList
 		};
 	}
 	
-	
+
+	private void sendToLogin(){
+		Intent intent = new Intent(this,MainActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
+	};
 }
 

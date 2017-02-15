@@ -11,10 +11,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.lotrading.controlwhapp.AsyncTask.MasterValuesAsyncTask;
+import com.lotrading.controlwhapp.config.IConstants;
 import com.lotrading.controlwhapp.control.ControlApp;
+import com.lotrading.controlwhapp.model.MasterValuesResponse;
 import com.lotrading.controlwhapp.model.ModelMasterValue;
 import com.lotrading.controlwhapp.model.ModelService;
 import com.lotrading.controlwhapp.model.ModelWhReceipt;
+import com.lotrading.controlwhapp.service.GeneralServicesImpl;
 import com.lotrading.controlwhapp.utilities.*;
 import com.zebra.sdk.comm.Connection;
 import com.zebra.sdk.comm.ConnectionException;
@@ -55,9 +59,7 @@ public class PanePrintActivity extends Activity {
 	private ListView lvPrinters;
 	private List<Map<String, String>> listPrinterMap = new ArrayList<Map<String,String>>();
 	private ArrayList<Bitmap> listLabels  = new ArrayList<Bitmap>();
-	//buttons 
 	private Button btnPrint;
-	//data printer settings
 	private String printerIP;
 	private String printerPort;
 	private TextView lblPrinterStatus;
@@ -86,8 +88,7 @@ public class PanePrintActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-	    // Do Here what ever you want do on back press;
-		Toast.makeText(PanePrintActivity.this, "Can not go back with print process active", Toast.LENGTH_LONG).show();
+	    Toast.makeText(PanePrintActivity.this, IConstants.PrintActivityMessages.CANNOT_GO_BACK, Toast.LENGTH_LONG).show();
 	}
 	
 	
@@ -212,15 +213,7 @@ public class PanePrintActivity extends Activity {
 	private void loadDataPrinters(){
 		try{
 			if(ControlApp.getInstance().getControlListMasterValues().getListPrinters().size() == 0){
-				String service = "ServiceMasterValues";
-				String [][] params = {{"operation", "getListMasterValues"}, {"masterId", "60"}, {"numValues", "3"}};
-				String callback = "callbackGetListPrinters";
-				String loadingMessage = "Loading printers";
-				
-				ModelService objService = new ModelService(service, params, callback, loadingMessage);
-				
-				TaskAsynCallService callServiceTask = new TaskAsynCallService();
-				callServiceTask.execute(objService);
+				new MasterValuesAsyncTask(IConstants.MasterValues.PRINTER, GeneralServicesImpl.getServicesInstance(), PanePrintActivity.this).execute();
 			}else{
 				createHashMapPrinterList(); //paint printers list
 			}
@@ -229,24 +222,19 @@ public class PanePrintActivity extends Activity {
 		}
 	}
 	
-	private void callbackGetListPrinters(JSONObject jsonResponse){
-		try {
-			//Log.i("fillDataAutoUnitTypes", jsonResponse.toString());
-			JSONArray data = new JSONArray(jsonResponse.getString("result"));
-			for(int i = 0; i < data.length(); i++){
-				JSONObject eachClientResponse = data.getJSONObject(i);
-				int masterId = eachClientResponse.getInt("master_id");
-				int valueId = eachClientResponse.getInt("value_id");
-				String value = eachClientResponse.getString("value");
-				String value2 = eachClientResponse.getString("value2");
-				String value3 = eachClientResponse.getString("value3");
+	public void callbackGetListPrinters(List<MasterValuesResponse> printers){
+			for(MasterValuesResponse masterValuesResponse : printers){
+
+				int masterId = Integer.parseInt(masterValuesResponse.getMasterId());
+				int valueId = Integer.parseInt(masterValuesResponse.getValueId());
+				String value = masterValuesResponse.getValue();
+				String value2 = masterValuesResponse.getValue2();
+				String value3 = masterValuesResponse.getValue3();
 				
 				ControlApp.getInstance().getControlListMasterValues().addPrinter(new ModelMasterValue(masterId, valueId, value, value2, value3));
 			}
 			createHashMapPrinterList();
-		} catch (JSONException ex) {
-			Log.e("WhReceiptLOActivity","Error parsing json in method callbackGetListUnitType ", ex);
-		}
+
 	}
 	
 	
@@ -301,36 +289,28 @@ public class PanePrintActivity extends Activity {
 	 */
 	//get each label in server
 	private void loadLabelsToServer() {
-		try{
 			ModelWhReceipt currentWhr = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt();
-			String pathImageBase =  currentWhr.getUrlLabelBase() + currentWhr.getWhReceiptNumber() + "/labels/label-";
+			String pathImageBase =  currentWhr.getUrlLabelBase() + currentWhr.getWhReceiptNumber() + "/";
 			Log.e("pathImageBase","pathImageBase: "+pathImageBase);
 			Log.e("Title", "Aqui esta todos los labels_ "+currentWhr.getNumLabels());
 			for(int i = 0; i < currentWhr.getNumLabels(); i++){
-				String urlLabel = pathImageBase +  (i + 1) + ".jpg";
+				String urlLabel = pathImageBase +  (i + 1);
 				Log.e("urlLabel","urlLabel: "+urlLabel);
 				TaskLoadImage loadImageAsy = new TaskLoadImage();
 				loadImageAsy.execute(urlLabel);
 			}
-		}catch(Exception ex){
-			Log.e("PanePrintActivity", "Error in method loadLabelsToServer", ex);
-		}
 	}
 	
 	private void addLabelInList(Bitmap labelBitmap) {
-		try{
-			if(labelBitmap.isRecycled()){
-				Log.d("addLabelInList", "reciclada");
-			}else{
-				Log.d("addLabelInList", "no reciclada");
-			}
+	if(labelBitmap.isRecycled()){
+		Log.d("addLabelInList", "reciclada");
+	}else{
+		Log.d("addLabelInList", "no reciclada");
+	}
 
 	listLabels.add(labelBitmap);
 	Log.i("PanePrintActivity", "label loaded " + labelBitmap.getWidth());
-}catch(Exception ex){
-		Log.e("PAnePrintActivity", "Error calling addLabelInList bitmap", ex);
-		}
-		}
+	}
 	
 	/* load imagen url */
 	private class TaskLoadImage extends AsyncTask<String, Void, Bitmap>{
@@ -351,8 +331,6 @@ public class PanePrintActivity extends Activity {
 	        try{
 	        	URL imageUrl = null;
 				HttpURLConnection conn = null;
-
-				
 				String uriImage = params[0];
 				imageUrl = new URL(uriImage);
 				conn = (HttpURLConnection) imageUrl.openConnection();
@@ -378,11 +356,6 @@ public class PanePrintActivity extends Activity {
 	    @Override
 	    protected void onPostExecute(Bitmap result) {
 	        super.onPostExecute(result);
-	        /*if(result.isRecycled()){
-	        	Log.e("PanePrintActivity on post", "reciclada");
-	        }else{
-	        	Log.e("PanePrintActivity on post", "no reciclada");
-	        }*/
 	        if(result != null){
 	        	addLabelInList(result);
 	        }else{
@@ -419,15 +392,8 @@ public class PanePrintActivity extends Activity {
 	public ZebraPrinter connect() {
 		Log.i("PanePrintActivity", "********Connecting...");
 		printerConnection = null;
-		try {
 			int port = Integer.parseInt(printerPort);
 			printerConnection = new TcpConnection(printerIP, port);
-		} catch (NumberFormatException e) {
-			lblPrinterStatus.setText("Port Number Is Invalid");
-			Log.i("PanePrintActivity", "********Port Number Is Invalid");
-			return null;
-		}
-
 		try {
 			printerConnection.open();
 			Log.i("PanePrintActivity", "********Connected");
@@ -537,8 +503,6 @@ public class PanePrintActivity extends Activity {
 	}
 
 	private void printLabelBitmap() {
-		 
-		try{
 			new Thread(new Runnable() {
 				
 	            public void run() {
@@ -550,7 +514,6 @@ public class PanePrintActivity extends Activity {
 	                	}else{
 	                		Log.d("recycled","no y el problema es de SDK");
 	                	}
-	                    
 	                    //create printer connection
 	                    int port = Integer.parseInt(printerPort);
 	                    Log.d("printer","ip: "+printerIP+", port:"+port);
@@ -568,7 +531,6 @@ public class PanePrintActivity extends Activity {
 	                } catch (ZebraPrinterLanguageUnknownException e) {
 	                	Log.e("PanePrintActivity", "Error in ZebraPrinterLanguageUnknownException" + e);
 	                } catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} finally {
 	                	Log.d("recicle","cambio");
@@ -579,11 +541,7 @@ public class PanePrintActivity extends Activity {
 	            }
 	        }).start(); 
 			btnPrint.setEnabled(false);
-		}catch(Exception e){
-			Toast.makeText(PanePrintActivity.this, "Error trying print label in this printer", Toast.LENGTH_LONG).show();
-			Log.e("PanePrintActivity", "Error in method  printLabelBitmap");
-		}
-    }
+		    }
 	
 	private Bitmap rotate(Bitmap bitmapOriginal){
 		try{
@@ -596,67 +554,6 @@ public class PanePrintActivity extends Activity {
 			return bitmapOriginal;
 		}
 	}
-	
-	
-	/********************************************** call services class ****************************/
-	
-	/*
-	 * call web services asynchronous task
-	 * 
-	 */
-	//asyn task
-	private class TaskAsynCallService extends AsyncTask<ModelService, Integer, Boolean> {
-		
-		//dialog = ProgressDialog.show(FilterCargoActivity.this, "", "Loading...", true);
-		private ProgressDialog Asycdialog = new ProgressDialog(PanePrintActivity.this);
-		private JSONObject respJSON;
-		private String serviceCallback;
-		
-		@Override
-        protected void onPreExecute() {
-            //set message of the dialog
-            Asycdialog.setMessage("Loading");
-            Asycdialog.setCancelable(false);
-			Asycdialog.setCanceledOnTouchOutside(false);
-            //show dialog
-            Asycdialog.show();
-            super.onPreExecute();
-        }
-		
-		protected Boolean doInBackground(ModelService... listModelService) {
-			boolean result = true;
-			
-			try {
-				ModelService objService = listModelService[0]; //object service
-				this.serviceCallback = objService.getCallback();
-				CallWebService callWebService = new CallWebService();
-				respJSON = new JSONObject(callWebService.callWebServiceExecute(objService.getService(), objService.getParams()));
-				result = true;
-				
-			} catch (Exception ex) {
-				Log.e("FilterCargoActivity", "Error in TaskAsynCallService (Service Rest)", ex);
-				result = false;
-				Toast.makeText(PanePrintActivity.this,"Error connecting web service", Toast.LENGTH_SHORT).show();
-			}
-			return result;
-		}
 
-		protected void onPostExecute(Boolean result) {
-			//response async
-			if(result){
-				callbackService();
-			}else{
-				Toast.makeText(PanePrintActivity.this,"Error calling operation web service", Toast.LENGTH_SHORT).show();
-			}
-			Asycdialog.dismiss();
-		}
-		
-		private void callbackService(){
-			if(serviceCallback.equals("callbackGetListPrinters")){
-				callbackGetListPrinters(respJSON); //load info JSON response
-			}
-		}
-		
-	}//end asyn task
 	
 }

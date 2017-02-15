@@ -11,8 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.lotrading.controlwhapp.AsyncTask.CreatePartialLabelAsyncTask;
 import com.lotrading.controlwhapp.AsyncTask.LocationListAsyncTask;
 import com.lotrading.controlwhapp.AsyncTask.MasterValuesAsyncTask;
+import com.lotrading.controlwhapp.AsyncTask.SaveWarehouseAsyncTask;
 import com.lotrading.controlwhapp.AsyncTask.TruckCompaniesAsyncTask;
 import com.lotrading.controlwhapp.config.IConstants;
 import com.lotrading.controlwhapp.control.ControlApp;
@@ -29,9 +31,15 @@ import com.lotrading.controlwhapp.model.ModelLocationItemWh;
 import com.lotrading.controlwhapp.model.ModelMasterValue;
 import com.lotrading.controlwhapp.model.ModelService;
 import com.lotrading.controlwhapp.model.ModelWhReceipt;
+import com.lotrading.controlwhapp.model.SaveWarehouseResponse;
+import com.lotrading.controlwhapp.model.Tracking;
 import com.lotrading.controlwhapp.model.TruckCompany;
+import com.lotrading.controlwhapp.model.Warehouse;
+import com.lotrading.controlwhapp.model.WarehouseItem;
 import com.lotrading.controlwhapp.service.GeneralServicesImpl;
+import com.lotrading.controlwhapp.service.WarehouseServicesImpl;
 import com.lotrading.controlwhapp.utilities.CallWebService;
+import com.lotrading.controlwhapp.view.ItemTableRow;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -106,6 +114,13 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 
 	private HashMap<RelativeLayout,ArrayList<String>> recordsTrackingList = new HashMap<RelativeLayout, ArrayList<String>>();
 	private HashMap<RelativeLayout,ArrayList<ModelLocationItemWh>> recordsLocationList = new HashMap<RelativeLayout, ArrayList<ModelLocationItemWh>>();
+
+	final String headerTableDataIPLO[] = { "Hazmat", "# Pieces", "Type",
+			"Length", "Width", "Height", "Volume", "Weigth[Lb]",
+			"Weigth[Kg]", "Location" };
+	final String headerTableDataRM[] = { "Hazmat", "# Pieces", "Type",
+			"P. Code", "Length", "Width", "Height", "Volume",
+			"Weigth[Lb]", "Weigth[Kg]", "Location" };
 
 
 	@Override
@@ -208,7 +223,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			ArrayList<ModelItemWhReceipt> listItemsWh = ControlApp
 					.getInstance().getControlWhReceipt().getModelWhReceipt()
 					.getListItemsWhLO();
-			repaintTableItemsWh(getAdapterTableListItemsWhLO(listItemsWh));
+			repaintTableItemsWh(/*getAdapterTableListItemsWhLO*/(listItemsWh));
 
 	}
 
@@ -236,7 +251,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 
 				if (ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdDep() == 2) {
 					if(listItemsWhLO.get(i).getLocations() == null || listItemsWhLO.get(i).getLocations().size()==0){
-                        ControlWhReceipt controlWhReceipt = ControlApp.getInstance().getControlWhReceipt();;
+                        ControlWhReceipt controlWhReceipt = ControlApp.getInstance().getControlWhReceipt();
                         ModelItemRawMaterials modelItemRawMaterials = controlWhReceipt.getModelWhReceipt().getListItemsRawMaterials().get(listItemsWhLO.get(i).getRelationIdRMItem());
                         listItemsWhLO.get(i).setLocations(modelItemRawMaterials.getListLocations());
                     }
@@ -257,18 +272,8 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 	}
 
 	// repaint table
-	private void repaintTableItemsWh(String dataTable[][]) {
-		try {
-
-			ModelWhReceipt currentWhReceipt = ControlApp.getInstance()
-					.getControlWhReceipt().getModelWhReceipt();//
-
-			String headerTableDataIPLO[] = { "Hazmat", "# Pieces", "Type",
-					"Length", "Width", "Height", "Volume", "Weigth[Lb]",
-					"Weigth[Kg]", "Location" };
-			String headerTableDataRM[] = { "Hazmat", "# Pieces", "Type",
-					"P. Code", "Length", "Width", "Height", "Volume",
-					"Weigth[Lb]", "Weigth[Kg]", "Location" };
+	private void repaintTableItemsWh(ArrayList<ModelItemWhReceipt> listItemsWhLO) {
+			ModelWhReceipt currentWhReceipt = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt();//
 
 			String[] headerTableData = null;
 			if (currentWhReceipt.getIdDep() == 1) { // rm
@@ -288,20 +293,15 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			tableItemsWhLO.addView(headerTable);
 
 
-			for (int i = 0; i < headerTableData.length; i++) {
-				TextView column = new TextView(this);
-				column.setLayoutParams(new TableRow.LayoutParams(
-						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-				column.setText(headerTableData[i]);
-				column.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
-				column.setTypeface(column.getTypeface(), Typeface.BOLD);
-				column.setGravity(Gravity.CENTER_HORIZONTAL);
-				column.setPadding(5, 5, 5, 5);
+			for (int i = 0; i < headerTableData.length-4; i++) {
+				TextView column = createColumnHeader(headerTableData[i],i);
 				headerTable.addView(column);
-
-				tableItemsWhLO.setColumnStretchable(i, true);
-				tableItemsWhLO.setColumnShrinkable(i, true);
+				/*tableItemsWhLO.setColumnStretchable(i, true);
+				tableItemsWhLO.setColumnShrinkable(i, true);*/
 			}
+
+		tableItemsWhLO.setShrinkAllColumns(true);
+		tableItemsWhLO.setStretchAllColumns(true);
 
 			// separator border headerTable in table
 			TableRow borderHeaderTable = new TableRow(this);
@@ -316,38 +316,14 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			tableItemsWhLO.addView(borderHeaderTable);
 
 			// fill data table
-			for (int i = 0; i < dataTable.length; i++) {
-				TableRow eachRow = new TableRow(this);
-				eachRow.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-				for (int j = 0; j <= 10 /* 10 fields */; j++) {
-
-					TextView column = new TextView(this);
-					column.setLayoutParams(new TableRow.LayoutParams(
-							LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT));
-					column.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
-					column.setGravity(Gravity.CENTER_HORIZONTAL);
-					if (j != 3) {
-						column.setText(dataTable[i][j]); // set info data table
-						eachRow.addView(column);
-					} else {
-						if (currentWhReceipt.getIdDep() == 1 /* rm */
-								&& !dataTable[i][3].equals("-1")) {
-							int positionRelation = Integer.parseInt(dataTable[i][3]);
-							ModelItemRawMaterials itemRMFather = currentWhReceipt.getListItemsRawMaterials().get(positionRelation);
-							String idCodeProduct = itemRMFather.getProductRef();
-							column.setText(idCodeProduct); // set info data
-							// table
-							eachRow.addView(column);
-						}
-					}
-				}
+			int index = 0;
+			for (/*int i = 0; i < dataTable.length; i++*/ModelItemWhReceipt modelItemWhReceipt : listItemsWhLO) {
+				ItemTableRow eachRow = new ItemTableRow(this,ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt());
+				eachRow.setRowData(modelItemWhReceipt);
 
 				// check is cloned
-				if (dataTable[i][11].equals("YES")) {
+				if (modelItemWhReceipt.isCloned()) {
 					eachRow.setBackgroundColor(Color.parseColor("#97D4FF")); // highligth
-					// row
-					// cloned
 				}
 
 				// create edit button and set event click
@@ -357,70 +333,77 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				OnClickListener listenerEdit = new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						currentIdPostitionEditItemDialog = ((Integer) v
-								.getTag()).intValue();
-						// change type dialog action
-						currentActionDialog = TypeDialog.EDIT;
-						// create dialog edit
-						createDialogAddEditItem();
+						currentIdPostitionEditItemDialog = ((Integer) v.getTag()).intValue();
+						currentActionDialog = TypeDialog.EDIT;// change type dialog action
+						createDialogAddEditItem();// create dialog edit
 					}
 				};
 
 				buttonEditItem.setOnClickListener(listenerEdit);
-				buttonEditItem.setTag(i);
+				buttonEditItem.setTag(index);
 				buttonEditItem.setText("Edit");
 				buttonEditItem.setBackgroundColor(Color.parseColor("#ff33b5e5"));
 				buttonEditItem.setTextColor(Color.parseColor("#ffffff"));
 				buttonEditItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
 				eachRow.addView(buttonEditItem); // add this button in each row
 
-				// create remove button and set event click
-				Button buttonRemoveItem = new Button(this);
-				// create listener for remove button
+				Button buttonRemoveItem = new Button(this);// create remove button and set event click
 				OnClickListener listenerRemove = new OnClickListener() {
 					@Override
-					public void onClick(View v) {
+					public void onClick(View v) {// create listener for remove button
 						int currentIdItem = ((Integer) v.getTag()).intValue();
 						createDialogRemoveItem(currentIdItem);
 					}
 				};
 				buttonRemoveItem.setOnClickListener(listenerRemove);
-				buttonRemoveItem.setTag(i);
+				buttonRemoveItem.setTag(index);
 				buttonRemoveItem.setText("X");
 				buttonRemoveItem.setBackgroundColor(Color.parseColor("#ffff4444"));
 				buttonRemoveItem.setTextColor(Color.parseColor("#ffffff"));
 				buttonRemoveItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
-				eachRow.addView(buttonRemoveItem); // add this button in each
-				// row
+				eachRow.addView(buttonRemoveItem); // add this button in each row
 
-				// create clone button and set event click
-				Button buttonCloneItem = new Button(this);
-				// create listener for remove button
+				Button buttonCloneItem = new Button(this);// create clone button and set event click
+
 				OnClickListener listenerClone = new OnClickListener() {
 					@Override
-					public void onClick(View v) {
+					public void onClick(View v) {// create listener for remove button
 						int currentIdItem = ((Integer) v.getTag()).intValue();
 						createDialogCloneItem(currentIdItem);
 					}
 				};
 				buttonCloneItem.setOnClickListener(listenerClone);
-				buttonCloneItem.setTag(i);
+				buttonCloneItem.setTag(index);
 				buttonCloneItem.setText("C");
 				buttonCloneItem.setBackgroundColor(Color.parseColor("#19BE37"));
 				buttonCloneItem.setTextColor(Color.parseColor("#ffffff"));
 				buttonCloneItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
 				eachRow.addView(buttonCloneItem); // add this button in each row
 
-				// add row in table, important!
-				tableItemsWhLO.addView(eachRow);
+				tableItemsWhLO.addView(eachRow);// add row in table, important!
+				index++;
 			}
-		} catch (Exception e) {
-			Log.e("WhReceiptLOActivity", "err painting table items wh >>>>", e);
-		}
+
 	}
 
+	private TextView createColumnHeader(String headerText,int index){
+		TextView column = new TextView(this);
+		column.setLayoutParams(new TableRow.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		column.setText(headerText);
+		column.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+		column.setTypeface(column.getTypeface(), Typeface.BOLD);
+		column.setGravity(Gravity.CENTER_HORIZONTAL);
+		column.setPadding(5, 5, 5, 5);
+
+		/*tableItemsWhLO.setColumnStretchable(index, true);
+		tableItemsWhLO.setColumnShrinkable(index, true);*/
+		return column;
+
+	}
+
+
 	private void initEvents() {
-		try {
 			Button btnAddWhItem = (Button) findViewById(R.id.btnAddItemWhLO);
 			btnAddWhItem.setOnClickListener(this);
 
@@ -459,55 +442,39 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				@Override
 				public void onClick(View v) {
 					txtAutoTruckCompany.setText("FEDEX GROUND");
-					ModelCarrier truckObj = ControlApp.getInstance()
-							.getControlListCarrier()
-							.findTruckCompanyByName("FEDEX GROUND");
-					if (truckObj != null) {
-						ControlApp.getInstance().getControlWhReceipt()
-								.getModelWhReceipt()
-								.setTruckCompany(truckObj);
-					}
+					ModelCarrier truckObj = ControlApp.getInstance().getControlListCarrier().findTruckCompanyByName("FEDEX GROUND");
+					if (truckObj != null)
+						ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setTruckCompany(truckObj);
 				}
 			});
-
-		} catch (Exception ex) {
-			Log.e("WhReceiptLOActivity", "err in method initEvents ", ex);
-		}
 	}
 
 	@Override
 	public void onClick(View v) {
 			switch (v.getId()) {
 				case R.id.btnAddItemWhLO:
-					// assign event add new item (dialog)
-					currentActionDialog = TypeDialog.ADD;
+					currentActionDialog = TypeDialog.ADD;// assign event add new item (dialog)
 					createDialogAddEditItem();
 					break;
 				case R.id.btnTakePhotosLO:
-					// save state fields unsaved in activity
-					String htPalletsStr = (String) ((EditText) findViewById(R.id.editTextNumberPalletsHTLO))
-							.getText().toString();
+					String htPalletsStr = ((EditText) findViewById(R.id.editTextNumberPalletsHTLO)).getText().toString();// save state fields unsaved in activity
 					if (!htPalletsStr.equals("")) { // check empty number
 						int htPallets = Integer.parseInt(htPalletsStr);
 						ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setHtPallets(htPallets);
 					}
-					String remarks = (String) ((EditText) findViewById(R.id.editTextRemarksLO)).getText().toString();
+					String remarks = ((EditText) findViewById(R.id.editTextRemarksLO)).getText().toString();
 					ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setRemarks(remarks);
 
-					// launch activity take photo
-					Intent takePhotoIntent = new Intent().setClass(WReceiptLOActivity.this, TakePhotoActivity.class);
+					Intent takePhotoIntent = new Intent().setClass(WReceiptLOActivity.this, TakePhotoActivity.class);// launch activity take photo
 					startActivity(takePhotoIntent);
 					break;
 				case R.id.buttonFinishWhReceiptLO:
-					// finish wh
-					// check data completed and items > 0
-					if (ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getTruckCompany().getIdCarrier() != 0
+					if (ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getTruckCompany().getIdCarrier() != 0 //finish wh check data completed and items > 0
 							&& ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getListItemsWhLO().size() > 0
 							) {
-						// Check department is RM and at least one location to be entered for each item //
-						if (ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdDep() == 2 &&
-								!validateLocations(ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getListItemsWhLO())
-								) {
+
+						if (ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdDep() == 2 && 	// Check department is RM and at least one location to be entered for each item //
+								!validateLocations(ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getListItemsWhLO())) {
 							Toast toast = Toast.makeText(WReceiptLOActivity.this,
 									"Some fields are required to finish warehouse receipt",
 									Toast.LENGTH_SHORT);
@@ -515,12 +482,12 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 							toast.show();
 						} else {
 							// save state fields unsaved in activity
-							String htPalletsStrSave = (String) ((EditText) findViewById(R.id.editTextNumberPalletsHTLO)).getText().toString();
+							String htPalletsStrSave = ((EditText) findViewById(R.id.editTextNumberPalletsHTLO)).getText().toString();
 							if (!htPalletsStrSave.equals("")) { // check empty number
 								int htPallets = Integer.parseInt(htPalletsStrSave);
 								ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setHtPallets(htPallets);
 							}
-							String remarksSave = (String) ((EditText) findViewById(R.id.editTextRemarksLO)).getText().toString();
+							String remarksSave = ((EditText) findViewById(R.id.editTextRemarksLO)).getText().toString();
 							ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setRemarks(remarksSave);
 
 							// create confirm dialog
@@ -541,33 +508,41 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 
 	private boolean validateLocations(ArrayList<ModelItemWhReceipt> listItemsWhLO) {
 		boolean isValid = true;
+		ModelWhReceipt modelWhReceipt = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt();
 		for (ModelItemWhReceipt item : listItemsWhLO){
 			if(item.getLocations().size() == 0) {
-				isValid = false;
-				break;
+				if(modelWhReceipt.getIdDep() == IConstants.DEPARTMENTS.RAW_MATERIAL){
+					ModelItemRawMaterials modelItemRawMaterials = modelWhReceipt.getListItemsRawMaterials().get(item.getRelationIdRMItem());
+					if(modelItemRawMaterials.getListLocations().size() == 0){
+						isValid = false;
+						return isValid;
+					}
+					else{
+						item.setLocations(modelItemRawMaterials.getListLocations());
+						isValid = true;
+					}
+
+				}else{
+					return false;
+				}
 			}
 		}
+
 		return isValid;
 	}
 
 	// dialog confirm wh info
 	private void createDialogConfirmTerminate() {
-			// Use the Builder class for convenient dialog construction
 			AlertDialog.Builder builder = new AlertDialog.Builder(this); // this
-			// activity
-			// class
-			builder.setMessage(
-					"Do you want to complete this Warehouse Receipt?")
-					.setTitle("Warehouse Receipt")
-					.setPositiveButton("Cancel",
-							new DialogInterface.OnClickListener() {
+			builder.setMessage(IConstants.WRActivityMessages.MESSAGE_CONFIRM_TERMINAT)
+					.setTitle(IConstants.WRActivityMessages.TITLE_CONFIRM_TERMINAT)
+					.setPositiveButton("Cancel",new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 													int id) {
 									// User cancelled the dialog
 								}
 							})
-					.setNegativeButton("OK",
-							new DialogInterface.OnClickListener() {
+					.setNegativeButton("OK",new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 													int id) {
 									terminateProcessWhReceipt();
@@ -586,8 +561,8 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			// activity
 			// class
 			builder.setMessage(
-					"Do you want to print partial labels?")
-					.setTitle("Warehouse Labels")
+					IConstants.WRActivityMessages.TITLE_CONFIRM_PARTIAL_LABEL)
+					.setTitle(IConstants.WRActivityMessages.MESSAGE_CONFIRM_TERMINAT)
 					.setPositiveButton("Cancel",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -600,10 +575,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 								public void onClick(DialogInterface dialog,
 													int id) {
 									//crear el metdo de creacion de labels en el servidor
-									ModelWhReceipt whReceipt = ControlApp.getInstance()
-											.getControlWhReceipt().getModelWhReceipt();
-
-
+									ModelWhReceipt whReceipt = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt();
 									String service = "ServiceWhReceipt";
 									String[][] params = {
 											{ "operation", "createPartialLabels" },
@@ -619,9 +591,18 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 									ModelService objService = new ModelService(service,
 											params, callback, loadingMessage);
 
-									TaskAsynCallService callServiceTask = new TaskAsynCallService();
-									callServiceTask.execute(objService);
-
+									/*TaskAsynCallService callServiceTask = new TaskAsynCallService();
+									callServiceTask.execute(objService);*/
+									Warehouse warehouse = new Warehouse();
+									// warehouse.setIdWhNumber(whReceipt.getWhReceiptNumber());
+									warehouse.setWhNumber(whReceipt.getWhReceiptNumber());
+									warehouse.setIdDepartment(whReceipt.getIdDep());
+									warehouse.setNumeroLabels(Integer.valueOf(ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getNumLabels()+""));
+									warehouse.setSupplierName(whReceipt.getNameSupplier());
+									warehouse.setClientName(whReceipt.getNameClient());
+									warehouse.setPoNumber(whReceipt.getPo());
+									CreatePartialLabelAsyncTask partialLabelAsyncTask = new CreatePartialLabelAsyncTask(WarehouseServicesImpl.getServicesInstance(),WReceiptLOActivity.this,warehouse);
+									partialLabelAsyncTask.execute();
 
 
 								}
@@ -752,13 +733,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 							String service = "ServiceWhReceipt";
 							String[][] params = {
 									{ "operation", "getInfoItemsPODepRM" },
-									{
-											"idPo",
-											ControlApp.getInstance()
-													.getControlWhReceipt()
-													.getModelWhReceipt()
-													.getIdPODepartment()
-													+ "" } };
+									{"idPo",ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().getIdPODepartment()+ "" } };
 							String callback = "callbackGetInfoItemsPODepRM";
 							String loadingMessage = "Loading items RM";
 
@@ -781,9 +756,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				Integer rowIndex = (Integer) row.getTag();
 				if(rowIndex!=null) {
 					ControlWhReceipt controlWhReceipt = ControlApp.getInstance().getControlWhReceipt();
-
 					ModelItemRawMaterials itemRM = controlWhReceipt.getModelWhReceipt().getListItemsRawMaterials().get(rowIndex);
-
 					Log.e("rowTag","on row index "+rowIndex);
 					TextView txtLength = (TextView) row.findViewWithTag("length");
 					TextView txtWidth = (TextView) row.findViewWithTag("width");
@@ -897,8 +870,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			}
 		}
 		loadTableItemsWh(); // repaint items!!
-		ControlApp.getInstance().getControlWhReceipt()
-				.getModelWhReceipt().setSavedRM(true);
+		ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt().setSavedRM(true);
 		dialog.dismiss(); // close dialog
 		hideKeyboard(WReceiptLOActivity.this);
 		/*} else {
@@ -968,6 +940,16 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 		return locations;
 	}
 
+	public void callbackGetPartialLabels(){
+		Log.e("return callback","return callback");
+		//llamar nueva activity
+		Toast.makeText(WReceiptLOActivity.this, "Imprimir labels", Toast.LENGTH_LONG).show();
+		Intent printLabelIntent = new Intent().setClass(
+				WReceiptLOActivity.this, PanePrintActivity.class);
+		printLabelIntent.putExtra("back", true);
+		startActivity(printLabelIntent);
+	}
+
 	private void validateWeightDiscrepancy(double weightKg,double qtyArrivedKG, int pieces) throws WeightException{
 		Log.e("weight", String.valueOf(weightKg));
 		Log.e("qtyArrivedKG", String.valueOf(qtyArrivedKG));
@@ -988,16 +970,6 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				throw new WeightException(totalWeigthArrived*minPercent,totalWeigthArrived*maxPercent);
 			}
 		}
-	}
-
-	public void callbackGetPartialLabels(JSONObject jsonResponse){
-		Log.e("return callback","return callback");
-		//llamar nueva activity
-		Toast.makeText(WReceiptLOActivity.this, "Imprimir labels", Toast.LENGTH_LONG).show();
-		Intent printLabelIntent = new Intent().setClass(
-				WReceiptLOActivity.this, PanePrintActivity.class);
-		printLabelIntent.putExtra("back", true);
-		startActivity(printLabelIntent);
 	}
 
 	public void callbackGetInfoItemsPODepRM(JSONObject jsonResponse) {
@@ -1056,7 +1028,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 						.getString("supplierRef");
 				int idUnitType = eachItemPurchaseOrder.getInt("idUnitType");
 				String unitType = eachItemPurchaseOrder.getString("unitType");
-				int idProduct = eachItemPurchaseOrder.getInt("idProduct");
+				String idProduct = eachItemPurchaseOrder.getString("idProduct");
 				String productName = eachItemPurchaseOrder
 						.getString("productName");
 				String manufacturerRef = eachItemPurchaseOrder
@@ -1785,118 +1757,137 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 	private void terminateProcessWhReceipt() {
 		try {
 			// send data to server
-			ModelWhReceipt whReceipt = ControlApp.getInstance()
-					.getControlWhReceipt().getModelWhReceipt(); // get object
-			// whr
+			Warehouse warehouse = new Warehouse();
+			ModelWhReceipt whReceipt = ControlApp.getInstance().getControlWhReceipt().getModelWhReceipt(); // get object
+			warehouse.setIdDepartment(whReceipt.getIdDep());
+			/*/ parse has map items per wh receipt
+		    */
 
-			/*
-			 * parse has map items per wh receipt
-			 */
-			JSONArray listItemsJSON = new JSONArray();
+			List<WarehouseItem> warehouseItems = new ArrayList<WarehouseItem>();
 			for (int i = 0; i < whReceipt.getListItemsWhLO().size(); i++) {
-				ModelItemWhReceipt eachItem = whReceipt.getListItemsWhLO().get(
-						i);
-				JSONObject mapDataItem = new JSONObject();
-				int isHaz = (eachItem.getHazmat() ? 1 : 0); // yes 1, no 0
-				mapDataItem.put("haz", isHaz + "");
-				mapDataItem.put("pieces", eachItem.getnPieces() + "");
-				mapDataItem.put("idType", eachItem.getIdUnitType() + "");
-				mapDataItem.put("nameType", eachItem.getNameUnitType() + "");
-				mapDataItem.put("length", eachItem.getLength() + "");
-				mapDataItem.put("width", eachItem.getWidth() + "");
-				mapDataItem.put("height", eachItem.getHeight() + "");
-				mapDataItem.put("weigth", eachItem.getWeigthLB() + "");
-				mapDataItem.put("volumeInches", eachItem.getWidth()*eachItem.getHeight()*eachItem.getLength() + "");
-				mapDataItem.put("weigthKg", eachItem.getWeigthKG() + "");
-				mapDataItem.put("remarks", eachItem.getRemarks() + "");
-				mapDataItem.put("poItem_id", eachItem.getPoItem_id() + "");
 
-				/*
-				 * add for rm dep, it need codeProduct
-				 */
-				// for rm
-				if (whReceipt.getIdDep() == 1 || whReceipt.getIdDep() == 2) { //is included 2 department, code 1 unknown department
-					int idRelationPosition = eachItem.getRelationIdRMItem();
-					ModelItemRawMaterials itemRMFather = whReceipt
-							.getListItemsRawMaterials().get(idRelationPosition);
-					String idCodeProduct = itemRMFather.getProductRef();
-					mapDataItem.put("codeProduct", idCodeProduct + "");
-					mapDataItem.put("urgent", itemRMFather.isUrgent());
+				WarehouseItem warehouseItem = new WarehouseItem();
+				ModelItemWhReceipt eachItem = whReceipt.getListItemsWhLO().get(i);
+				int isHaz = (eachItem.getHazmat() ? 1 : 0); // yes 1, no 0
+
+				warehouseItem.setHazardaous(String.valueOf(isHaz));
+				warehouseItem.setPieces(eachItem.getnPieces());
+				warehouseItem.setIdType(String.valueOf(eachItem.getIdUnitType()));
+				warehouseItem.setNameType(eachItem.getNameUnitType());
+				warehouseItem.setLength((eachItem.getLength()));
+				warehouseItem.setWidth((eachItem.getWidth()));
+				warehouseItem.setHeight((eachItem.getHeight()));
+				warehouseItem.setWeigth(eachItem.getWeigthLB());
+				warehouseItem.setVolumeInches(eachItem.getWidth()*eachItem.getHeight()*eachItem.getLength());
+				warehouseItem.setWeigthKg(eachItem.getWeigthKG());
+				warehouseItem.setRemarks(eachItem.getRemarks());
+				warehouseItem.setPoItemId(String.valueOf(eachItem.getPoItem_id()));
+				// warehouseItem.setIdItem();
+
+
+			if (whReceipt.getIdDep() == 1 || whReceipt.getIdDep() == 2) { //is included 2 department, code 1 unknown department
+				int idRelationPosition = eachItem.getRelationIdRMItem();
+				ModelItemRawMaterials itemRMFather = whReceipt
+						.getListItemsRawMaterials().get(idRelationPosition);
+				String idCodeProduct = itemRMFather.getProductRef();
+				warehouseItem.setIdProduct((idCodeProduct));
+				warehouseItem.setUrgent(String.valueOf(itemRMFather.isUrgent()));
 				}
+
 
 				// locations list
 				JSONArray mapDataLocation = new JSONArray();
+				List<Location> locations = new ArrayList<Location>();
 				for (int j = 0; j < eachItem.getLocations().size(); j++) {
-					ModelLocationItemWh eachLocation = eachItem.getLocations()
-							.get(j);
+					ModelLocationItemWh eachLocation = eachItem.getLocations().get(j);
+					Location location = new Location();
 					JSONObject eachLocationJSON = new JSONObject();
-					eachLocationJSON.put("loc", eachLocation.getId()+ "");
-					eachLocationJSON.put("label", eachLocation.getLabel());
-					eachLocationJSON.put("pc", eachLocation.getnPieces() + "");
-					mapDataLocation.put(eachLocationJSON);
+					location.setLoc(String.valueOf(eachLocation.getId()));
+					location.setPc(String.valueOf(eachLocation.getnPieces()));
+					location.setLabel(eachLocation.getLabel());
+					locations.add(location);
 				}
-				mapDataItem.put("locations", mapDataLocation);
+				warehouseItem.setLocations(locations);
+
 
 				// tracking list
 				JSONArray mapDataTracking = new JSONArray();
+				List<Tracking> trackingList = new ArrayList<Tracking>();
 				for (int j = 0; j < eachItem.getListTrackings().size(); j++) {
 					String eachTracking = eachItem.getListTrackings().get(j);
 					mapDataTracking.put(eachTracking);
+					Tracking tracking = new Tracking(eachTracking);
+					trackingList.add(tracking);
 				}
-				mapDataItem.put("trackings", mapDataTracking);
+				warehouseItem.setTrackings(trackingList);
 
-				listItemsJSON.put(mapDataItem);
+				warehouseItems.add(warehouseItem);
+
 			}
+			warehouse.setWareHouseItems(warehouseItems);
 
-			Log.i("**************** Items json to String",listItemsJSON.toString());
 
 			// list items arrived per dep
 			JSONArray listItemsIPJSON = new JSONArray();
 			JSONArray listItemsRMJSON = new JSONArray();
+
+			List<WarehouseItem> warehouseDepartmentItems = new ArrayList<WarehouseItem>();
+
 			if (whReceipt.getIdDep() == 3) { // ip
-				for (int i = 0; i < whReceipt.getListItemsIndustrialPurchase()
-						.size(); i++) {
-					ModelItemIndustrialPurchase eachItem = whReceipt
-							.getListItemsIndustrialPurchase().get(i);
-					JSONObject mapDataItem = new JSONObject();
-					mapDataItem.put("itemId", eachItem.getIdItem() + "");
-					mapDataItem.put("quantity", eachItem.getQuantity() + "");
-					mapDataItem.put("quantityArrived", eachItem.getQtyArrived()
-							+ "");
-					mapDataItem.put("quantityEntered", eachItem.getQtyEntered()
-							+ "");
-					listItemsIPJSON.put(mapDataItem); // add json object
+				for (int i = 0; i < whReceipt.getListItemsIndustrialPurchase().size(); i++) {
+					ModelItemIndustrialPurchase eachItem = whReceipt.getListItemsIndustrialPurchase().get(i);
+					WarehouseItem warehouseDepartmentItem = new WarehouseItem();
+					warehouseDepartmentItem.setIdItem(eachItem.getIdItem());
+					warehouseDepartmentItem.setQuantity(eachItem.getQuantity());
+					warehouseDepartmentItem.setQuantityArrived(eachItem.getQtyArrived());
+					warehouseDepartmentItem.setQuantityEntered(eachItem.getQtyEntered());
+					warehouseDepartmentItems.add(warehouseDepartmentItem);
 				}
+
 			} else if (whReceipt.getIdDep() == 2) { // rm
 				for (int i = 0; i < whReceipt.getListItemsRawMaterials().size(); i++) {
-					ModelItemRawMaterials eachItem = whReceipt
-							.getListItemsRawMaterials().get(i);
+					WarehouseItem warehouseItem = new WarehouseItem();
+					ModelItemRawMaterials eachItem = whReceipt.getListItemsRawMaterials().get(i);
 					JSONObject mapDataItem = new JSONObject();
+
 					mapDataItem.put("itemID", eachItem.getIdItem() + "");
-					mapDataItem
-							.put("productRed", eachItem.getProductRef() + "");
+					mapDataItem.put("productRed", eachItem.getProductRef() + "");
 					mapDataItem.put("unit", eachItem.getUnit() + "");
 					mapDataItem.put("quantity", eachItem.getQuantity() + "");
-					mapDataItem.put("quantityArrivedLB",
-							eachItem.getQtyArrivedLB() + "");
-					mapDataItem.put("quantityArrivedKG",
-							eachItem.getQtyArrivedKG() + "");
+					mapDataItem.put("quantityArrivedLB",eachItem.getQtyArrivedLB() + "");
+					mapDataItem.put("quantityArrivedKG",eachItem.getQtyArrivedKG() + "");
 					mapDataItem.put("nPieces", eachItem.getnPieces() + "");
-					mapDataItem.put("worksheetID", eachItem.getOrderToPlace()
-							+ "");
-					mapDataItem.put("packageTypeID", eachItem.getUnitType()
-							.getValueId() + "");
-					mapDataItem.put("packageTypeName", eachItem.getUnitType()
-							.getValue() + "");
-					mapDataItem.put("isCompleted", eachItem.getIscompleted()+ "");
-					mapDataItem.put("remarks", eachItem.getRemarks()+ "");
+					mapDataItem.put("worksheetID", eachItem.getOrderToPlace()+ "");
+					mapDataItem.put("packageTypeID", eachItem.getUnitType().getValueId() + "");
+					mapDataItem.put("packageTypeName", eachItem.getUnitType().getValue() + "");
+					mapDataItem.put("isCompleted", eachItem.getIscompleted() + "");
+					mapDataItem.put("remarks", eachItem.getRemarks() + "");
+
+
+					warehouseItem.setIdItem(eachItem.getIdItem());
+					warehouseItem.setIdProduct((eachItem.getProductRef()));
+					//Revisar este parametro
+					warehouseItem.setUnitType(String.valueOf(eachItem.getUnit()));
+					warehouseItem.setQuantity((int) eachItem.getQuantity());
+					warehouseItem.setQuantityArrivedKG((int) eachItem.getQtyArrivedKG());
+					warehouseItem.setQuantityArrived((int) eachItem.getQtyArrivedLB());
+					warehouseItem.setPieces(eachItem.getnPieces());
+					warehouseItem.setWorksheetId(String.valueOf(eachItem.getOrderToPlace()));
+					warehouseItem.setIdUnitType(eachItem.getUnitType().getValueId());
+					warehouseItem.setUnitType(eachItem.getUnitType().getValue());
+					warehouseItem.setIsCompleted(eachItem.getIscompleted());
+					warehouseItem.setRemarks(eachItem.getRemarks());
+
+					warehouseDepartmentItems.add(warehouseItem);
 
 					listItemsRMJSON.put(mapDataItem); // add json object
 				}
 			}
 
+			warehouse.setDepartmentItems(warehouseDepartmentItems);
+
 			// get data
-			String whID = whReceipt.getIdWhReceipt() + "";
+			/*String whID = whReceipt.getIdWhReceipt() + "";
 			String whNumber = whReceipt.getWhReceiptNumber()+ "";
 			String idPo = whReceipt.getIdPODepartment() + "";
 			String idDepartment = whReceipt.getIdDep() + "";
@@ -1908,9 +1899,22 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			String numPallets = whReceipt.getHtPallets() + "";
 			String remarks = whReceipt.getRemarks();
 			String dateReceipt = whReceipt.getDateTimeReceived() + "";
-			String employeeEntered = whReceipt.getNameEmployeeEntered() + "";
+			String employeeEntered = whReceipt.getNameEmployeeEntered() + "";*/
 
-			String service = "ServiceWhReceipt";
+			warehouse.setWhReceiptId(whReceipt.getIdWhReceipt());
+			warehouse.setWhNumber(whReceipt.getWhReceiptNumber());
+			warehouse.setIdPo(Integer.valueOf(whReceipt.getIdPODepartment()));
+			warehouse.setPoNumber(whReceipt.getPo());
+			warehouse.setClientName(whReceipt.getNameClient());
+			warehouse.setSupplierName(whReceipt.getNameSupplier());
+			warehouse.setTruckName(whReceipt.getTruckCompany().getCarrier());
+			warehouse.setTruckId(String.valueOf(whReceipt.getTruckCompany().getIdCarrier()));
+			warehouse.setHtPallets(String.valueOf(whReceipt.getHtPallets()));
+			warehouse.setRemarks(whReceipt.getRemarks());
+			warehouse.setDateReceipt(whReceipt.getDateTimeReceived());
+			warehouse.setEmployeeEntered(whReceipt.getNameEmployeeEntered());
+
+			/* String service = "ServiceWhReceipt";
 			String[][] params = { { "operation", "saveWarehouseReceipt" },
 					{ "idPo", idPo }, { "whID", whID },{ "whNumber", whNumber },
 					{ "idDepartment", idDepartment }, { "po", po },
@@ -1919,7 +1923,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 					{ "numPallets", numPallets }, { "remarks", remarks },
 					{ "employeeEntered", employeeEntered },
 					{ "dateReceipt", dateReceipt },
-					{ "listItems", listItemsJSON.toString() },
+					//{ "listItems", listItemsJSON.toString() },
 					{ "listItemsIP", listItemsIPJSON.toString() },
 					{ "listItemsRM", listItemsRMJSON.toString() } };
 			String callback = "callbackSaveWarehouseReceipt";
@@ -1928,21 +1932,24 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			ModelService objService = new ModelService(service, params,
 					callback, loadingMessage);
 			TaskAsynCallService callServiceTask = new TaskAsynCallService();
-			callServiceTask.execute(objService);
+			callServiceTask.execute(objService); */
+
+			new SaveWarehouseAsyncTask(WarehouseServicesImpl.getServicesInstance(),this,warehouse).execute();
+
 		} catch (Exception e) {
 			Log.e("WhReceiptLOActivity",
 					"err in method terminateProcessWhReceipt ", e);
 		}
 	}
 
-	private void callbackSaveWarehouseReceipt(JSONObject jsonResponse) {
+	public void callbackSaveWarehouseReceipt(SaveWarehouseResponse saveWarehouseResponse) {
 		try {
-			Log.i("callbackSaveWarehouseReceipt", jsonResponse.toString());
-			JSONObject data = new JSONObject(jsonResponse.getString("result"));
-			String isCreated = data.getString("isCreated");
-			int totalLabels = Integer.parseInt(data.getString("totalLabels"));
+			// Log.i("callbackSaveWarehouseReceipt", jsonResponse.toString());
+
+			boolean isCreated = saveWarehouseResponse.isCreated();
+			int totalLabels = saveWarehouseResponse.getTotalLabels();
 			// check if is create is true
-			if (isCreated.equals("true")) {
+			if (isCreated) {
 				ControlApp.getInstance().getControlWhReceipt()
 						.getModelWhReceipt().setNumLabels(totalLabels);
 				// go pane print labels
@@ -3611,7 +3618,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				/*TaskAsynCallService callServiceTask = new TaskAsynCallService();
 				callServiceTask.execute(objService);*/
 
-				new LocationListAsyncTask(GeneralServicesImpl.getServicesInstance(),this).execute();
+				new LocationListAsyncTask(GeneralServicesImpl.getServicesInstance(),this,false).execute();
 
 			} else {
 				loadDataAutoLocations(); // dialog always is destroyed so,
@@ -3634,8 +3641,9 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				ModelService objService = new ModelService(service, params,
 						callback, loadingMessage);
 
-				TaskAsynCallService callServiceTask = new TaskAsynCallService();
-				callServiceTask.execute(objService);
+				/*TaskAsynCallService callServiceTask = new TaskAsynCallService();
+				callServiceTask.execute(objService);*/
+				new LocationListAsyncTask(GeneralServicesImpl.getServicesInstance(),this,true).execute();
 			} else {
 				loadDataAutoLocationsInflate(row); // dialog always is destroyed so,
 				// should be loaded again
@@ -3656,22 +3664,16 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 			}
 			loadDataAutoLocations();
 			}
-	private void callbackGetListLocationsInflate(JSONObject jsonResponse) {
-		try {
-			JSONArray data = new JSONArray(jsonResponse.getString("result"));
-			for (int i = 0; i < data.length(); i++) {
-				JSONObject eachClientResponse = data.getJSONObject(i);
-				String location = eachClientResponse.getString("lc");
-				int id = eachClientResponse.getInt("id");
+	public void callbackGetListLocationsInflate(List<Location> locations) {
+			for (Location location:locations) {
+
+				String strLocation = location.getLoc();
+				int id = Integer.parseInt(location.getWhReceiptItemLocationId());
 				ControlApp.getInstance().getControlListLocations()
-						.addLocation(new ModelLocation(location, id));
+						.addLocation(new ModelLocation(strLocation, id));
 			}
 			loadDataAutoLocationsInflate(null);
-		} catch (JSONException ex) {
-			Log.e("WhReceiptLOActivity",
-					"Error parsing json in method callbackGetListUnitType ", ex);
-		}
-	}
+			}
 
 	private void loadDataAutoLocations() {
 		try {
@@ -3877,16 +3879,16 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				//callbackGetListLocations(respJSON);
 
 			} else if (serviceCallback.equals("callbackGetListLocationsInflate")) {
-				callbackGetListLocationsInflate(respJSON);
+				//callbackGetListLocationsInflate(respJSON);
 
 			} else if (serviceCallback.equals("callbackSaveWarehouseReceipt")) {
-				callbackSaveWarehouseReceipt(respJSON);
+				// callbackSaveWarehouseReceipt(respJSON);
 			} else if (serviceCallback.equals("callbackGetInfoItemsPODepRM")) {
 				callbackGetInfoItemsPODepRM(respJSON);
 			} else if (serviceCallback.equals("callbackGetInfoItemsPODepIP")) {
 				callbackGetInfoItemsPODepIP(respJSON);
 			} else if (serviceCallback.equals("callbackGetPartialLabels")) {
-				callbackGetPartialLabels(respJSON);
+				// callbackGetPartialLabels(respJSON);
 			}
 		}
 

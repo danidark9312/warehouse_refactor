@@ -2,9 +2,11 @@ package com.lotrading.controlwhapp.AsyncTask;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.lotrading.controlwhapp.FilterCargoActivity;
+import com.lotrading.controlwhapp.config.IConstants;
 import com.lotrading.controlwhapp.model.Po;
 import com.lotrading.controlwhapp.model.Warehouse;
 import com.lotrading.controlwhapp.service.WarehouseServices;
@@ -48,13 +50,14 @@ public class CreateWarehouseAsyncTask extends AsyncTask<String, Integer, Boolean
         }
 		@Override
 		protected Boolean doInBackground(String... listModelService) {
-			boolean result = true;
+			boolean result = false;
 
 			try {
 				warehouseResult = warehouseServices.createWarehouse(this.warehouse);
 				result = warehouseResult!=null;
 
 			} catch(RetrofitError er) {
+				Log.e("Error caling services",IConstants.ERROR_DEFAULT_MESSAGE,er);
 				repositoryError = RepositoryMapper.convertRetrofitErrorToRepositoryError(er);
 			}
 			return result;

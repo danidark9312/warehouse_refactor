@@ -18,10 +18,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 
+import com.lotrading.controlwhapp.AsyncTask.UploadPhotoAsyncTask;
 import com.lotrading.controlwhapp.control.ControlApp;
 import com.lotrading.controlwhapp.model.ModelFileUpload;
 
 import com.lotrading.controlwhapp.config.Config;
+import com.lotrading.controlwhapp.service.WarehouseServicesImpl;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -247,8 +249,10 @@ public class TakePhotoActivity extends Activity {
 	
 	private void sendToServer(File file) {
 		try{
-			UploaderPhoto uploadPhotoTask = new UploaderPhoto();
-			uploadPhotoTask.execute(file);
+			/*UploaderPhoto uploadPhotoTask = new UploaderPhoto();
+			uploadPhotoTask.execute(file);*/
+			new UploadPhotoAsyncTask(WarehouseServicesImpl.getServicesInstance(),this,file).execute();
+
 		}catch(Exception e){
 			Log.e("TakePhoto", "err in method setPic ", e);
 			Toast.makeText(TakePhotoActivity.this, "error creating asy task in sendToServer " + e, Toast.LENGTH_LONG).show();

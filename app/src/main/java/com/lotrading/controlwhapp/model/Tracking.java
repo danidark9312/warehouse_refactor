@@ -4,9 +4,11 @@ public class Tracking {
 
 	private String whTrackingId;
 	private String trackingNumber;
-	
-	
-	
+
+	public Tracking(String trackingNumber){
+		this.trackingNumber = trackingNumber;
+	}
+
 	public String getWhTrackingId() {
 		return whTrackingId;
 	}

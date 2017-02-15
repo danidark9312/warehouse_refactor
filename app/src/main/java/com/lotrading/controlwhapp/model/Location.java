@@ -8,6 +8,7 @@ public class Location{
 	private String whReceiptItemLocationId;
 	private String loc;
 	private String pc;
+	private String label;
 	
 	
 	public String getLoc() {
@@ -27,5 +28,13 @@ public class Location{
 	}
 	public void setWhReceiptItemLocationId(String whReceiptItemLocationId) {
 		this.whReceiptItemLocationId = whReceiptItemLocationId;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 }
