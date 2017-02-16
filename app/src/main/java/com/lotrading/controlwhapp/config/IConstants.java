@@ -5,7 +5,11 @@ package com.lotrading.controlwhapp.config;
  */
 
 public interface IConstants {
-    String URL_PRODUCCION = "http://10.2.2.6:8084/warehouseWS";
+    //Desarrollo
+    // String URL_PRODUCCION = "http://10.2.2.6:8084/warehouseWS";
+    //Pruebas
+    String URL_PRODUCCION = "http://19 2.168.111.89/warehouseWS";
+
     String ERROR_REQUEST_TIMEOUT_MESSAGE = "La solicitud está tardando demasiado. Por favor inténtalo nuevamente.";
     String ERROR_DEFAULT_MESSAGE = "Ha ocurrido un error, inténtalo en unos minutos.";
     String ERROR_UNAUTHORIZED_MESSAGE = "El usuario no se encuentra autorizado en la aplicación";
@@ -15,27 +19,29 @@ public interface IConstants {
     int ERROR_NOT_FOUND = 404;
     int ERROR_BAD_REQUEST = 400;
     //String URL_PRODUCCION = "http://10.2.2.104:8090/warehouseWS";
-    long NO_TIMEOUT= -1;
+    long NO_TIMEOUT = -1;
     long THIRTY = 30;
-    String SUCCESS ="SUCCESS" ;
+    String SUCCESS = "SUCCESS";
 
-    interface MasterValues{
+    interface MasterValues {
         int UNITTYPE = 22;
         int PRINTER = 60;
     }
-    interface DEPARTMENTS{
-        int RAW_MATERIAL=2;
+
+    interface DEPARTMENTS {
+        int RAW_MATERIAL = 2;
     }
 
-    interface ExceptionTags{
+    interface ExceptionTags {
         String EXCECUTION_ERROR = "Excecution error";
     }
-    interface ExceptionMessage{
+
+    interface ExceptionMessage {
         String LOADING_IMAGE_ERROR = "Error fetching the image from url";
         String JSON_PARSE = "Error parsing json";
     }
 
-    interface WRActivityMessages{
+    interface WRActivityMessages {
         String MESSAGE_CONFIRM_TERMINAT = "Do you want to complete this Warehouse Receipt?";
         String TITLE_CONFIRM_TERMINAT = "Warehouse Receipt";
 
@@ -43,9 +49,9 @@ public interface IConstants {
         String TITLE_CONFIRM_PARTIAL_LABEL = "Warehouse Labels";
 
 
-
     }
-    interface PrintActivityMessages{
+
+    interface PrintActivityMessages {
         String CANNOT_GO_BACK = "Can not go back with print process active";
 
     }
