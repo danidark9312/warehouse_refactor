@@ -3459,8 +3459,12 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 											  int before, int count) {
 						int position = (Integer) qtyArrivedEditText.getTag();
 						int qty = 0;
-						if (!((String) s.toString()).equals("")) {
-							qty = Integer.parseInt((String) s.toString());
+						try {
+							if (!((String) s.toString()).equals("")) {
+								qty = Integer.parseInt((String) s.toString());
+							}
+						}catch(NumberFormatException e){
+							Log.e("Error in format","The number entered is not an Integer number");
 						}
 						int response = ControlApp.getInstance()
 								.getControlWhReceipt().getModelWhReceipt()

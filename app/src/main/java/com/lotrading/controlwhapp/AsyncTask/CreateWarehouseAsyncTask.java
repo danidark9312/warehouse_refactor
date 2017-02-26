@@ -68,7 +68,11 @@ public class CreateWarehouseAsyncTask extends AsyncTask<String, Integer, Boolean
 			if(result){
 				callbackService();
 			}else{
-				Toast.makeText(filterCargoActivity,"Error calling operation web service", Toast.LENGTH_SHORT).show();
+				if(repositoryError.getErrorId() == IConstants.ERROR_UNAUTHORIZED_CODE){
+					Toast.makeText(filterCargoActivity,IConstants.ERROR_OPEN_PO, Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(filterCargoActivity,IConstants.ERROR_DEFAULT_MESSAGE, Toast.LENGTH_SHORT).show();
+				}
 			}
 			Asycdialog.dismiss();
 			super.onPostExecute(result);

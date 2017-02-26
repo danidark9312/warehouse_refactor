@@ -188,7 +188,7 @@
                 android:background="@null"
                 android:contentDescription="Cargo Sheet"
                 android:src="@drawable/cargo_sheet"
-                 />
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

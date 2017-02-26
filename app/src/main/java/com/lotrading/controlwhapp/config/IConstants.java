@@ -13,6 +13,7 @@ public interface IConstants {
     String ERROR_REQUEST_TIMEOUT_MESSAGE = "La solicitud está tardando demasiado. Por favor inténtalo nuevamente.";
     String ERROR_DEFAULT_MESSAGE = "Ha ocurrido un error, inténtalo en unos minutos.";
     String ERROR_UNAUTHORIZED_MESSAGE = "El usuario no se encuentra autorizado en la aplicación";
+    String ERROR_OPEN_PO = "La PO se encuentra abierta";
     int ERROR_UNAUTHORIZED_CODE = 401;
     int ERROR_NOT_CONTENT = 204;
     int ERROR_DEFAULT_CODE = 0;
