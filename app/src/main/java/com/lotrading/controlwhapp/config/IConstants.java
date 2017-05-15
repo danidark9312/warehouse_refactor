@@ -8,7 +8,9 @@ public interface IConstants {
     //Desarrollo
     // String URL_PRODUCCION = "http://10.2.2.6:8084/warehouseWS";
     //Pruebas
-    String URL_PRODUCCION = "http://19 2.168.111.89/warehouseWS";
+    //String URL_PRODUCCION = "http://19 2.168.111.89/warehouseWS";
+
+    String URL_PRODUCCION = "http://10.2.2.138:8081/warehouseWS";
 
     String ERROR_REQUEST_TIMEOUT_MESSAGE = "La solicitud está tardando demasiado. Por favor inténtalo nuevamente.";
     String ERROR_DEFAULT_MESSAGE = "Ha ocurrido un error, inténtalo en unos minutos.";
