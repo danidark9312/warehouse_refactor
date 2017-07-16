@@ -32,6 +32,9 @@ public class WarehouseItem{
 	private Double weigth;
 	private Double weigthKg;
 	private Double volumeInches;
+
+	private Double volumeMeters;
+
 	private Integer pieces;
 	private String nameType;
 	private String idType;
@@ -46,6 +49,15 @@ public class WarehouseItem{
 	private List<Tracking> trackings;
 	private String trackingsString;
 	private Integer isCompleted;
+
+	public Double getVolumeMeters() {
+		return volumeMeters;
+	}
+
+	public void setVolumeMeters(Double volumeMeter) {
+		this.volumeMeters = volumeMeter;
+	}
+
 	public Integer getIdItem() {
 		return idItem;
 	}

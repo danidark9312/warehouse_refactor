@@ -1,4 +1,4 @@
-#Sun Feb 26 14:27:21 COT 2017
-base.0=D\:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Mon May 22 10:57:21 COT 2017
+base.0=D\:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=D\:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=D\:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

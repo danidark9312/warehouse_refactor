@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\java\Proyectos\LOTRADING\appWarehouse_V2\warehouse_refactor\app\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\java\Proyectos\LOTRADING\appWarehouse_V2\warehouse_refactor\app\src\debug\shaders"/></dataSet></merger>

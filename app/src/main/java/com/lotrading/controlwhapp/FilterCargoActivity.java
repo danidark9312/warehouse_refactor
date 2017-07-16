@@ -1,3 +1,4 @@
+
 package com.lotrading.controlwhapp;
 
 import java.text.DecimalFormat;

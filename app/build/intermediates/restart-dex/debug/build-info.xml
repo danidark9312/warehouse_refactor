@@ -5,32 +5,32 @@
     density="mdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="3358205169765061"
-    token="-1772788141766956511"
+    timestamp="352770802853214"
+    token="921244268920535899"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="85294" />
+        duration="5584" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="9770" />
+        duration="2409" />
     <task
         name="verifier"
-        duration="757" />
+        duration="245" />
 
     <artifact
-        location="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\outputs\apk\app-debug.apk"
+        location="D:\java\Proyectos\LOTRADING\appWarehouse_V2\warehouse_refactor\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="3358205169765061"
+        timestamp="352770802853214"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="D:\java\Proyectos\LOTRADING\AppWarehouse_refactor\app\build\outputs\apk\app-debug.apk"
+            location="D:\java\Proyectos\LOTRADING\appWarehouse_V2\warehouse_refactor\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
 

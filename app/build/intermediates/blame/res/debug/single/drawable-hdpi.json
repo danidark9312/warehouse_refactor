@@ -1,30 +1,30 @@
 [
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\scanner.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\scanner.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher_custom.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher_custom.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\cargo_receipt.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\cargo_receipt.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\lotrading.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\lotrading.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\lotrading.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\lotrading.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\splash_screen_9.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\splash_screen_9.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\profile_photo.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\profile_photo.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\cargo_sheet.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\cargo_sheet.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\cargo_sheet.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\cargo_sheet.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\profile_photo.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\profile_photo.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher_custom.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher_custom.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\scanner.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\scanner.png"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\splash_screen_9.png",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\splash_screen_9.png"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\cargo_receipt.png",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\drawable-hdpi\\cargo_receipt.png"
     }
 ]

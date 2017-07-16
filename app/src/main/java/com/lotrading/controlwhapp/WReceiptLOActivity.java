@@ -1779,6 +1779,8 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 				warehouseItem.setHeight((eachItem.getHeight()));
 				warehouseItem.setWeigth(eachItem.getWeigthLB());
 				warehouseItem.setVolumeInches(eachItem.getWidth()*eachItem.getHeight()*eachItem.getLength());
+				/*En caso de que el valor este en centimetros, para tener el volumen en metros, se multiplican las longitudes y se convierte a metros*/
+				warehouseItem.setVolumeMeters(warehouseItem.getVolumeInches()*0.000001);
 				warehouseItem.setWeigthKg(eachItem.getWeigthKG());
 				warehouseItem.setRemarks(eachItem.getRemarks());
 				warehouseItem.setPoItemId(String.valueOf(eachItem.getPoItem_id()));
@@ -3753,7 +3755,7 @@ public class WReceiptLOActivity extends Activity implements OnClickListener {
 						if (adapter!=null) {
 							int size = adapter.getCount();
 							for (int i= 0 ;i<size;i++){
-								if(textInput.equals(adapter.getItem(i))){
+								if(textInput.equalsIgnoreCase(adapter.getItem(i).toString())){
 									textFromList = true;
 									break;
 								}

@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+        "outputFile": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 187
                 },
                 "from": {
-                    "file": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -33,7 +33,7 @@
                     "endOffset": 351
                 },
                 "from": {
-                    "file": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -54,7 +54,7 @@
                     "endOffset": 789
                 },
                 "from": {
-                    "file": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,

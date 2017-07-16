@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
+        "outputFile": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\values-sw720dp-land\\dimens.xml",
+                    "file": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\values-sw720dp-land\\dimens.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 205,
+                        "startOffset": 206,
                         "endColumn": 57,
-                        "endOffset": 258
+                        "endOffset": 259
                     }
                 }
             }

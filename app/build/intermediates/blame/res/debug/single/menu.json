@@ -1,30 +1,30 @@
 [
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\home.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\home.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\wreceipt_lo.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\wreceipt_lo.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\main.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\pane_print.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\pane_print.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\splash.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\splash.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\home.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\home.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\filter_cargo.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\filter_cargo.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\take_photo.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\take_photo.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\take_photo.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\take_photo.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\filter_cargo.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\filter_cargo.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\pane_print.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\pane_print.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\splash.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\splash.xml"
     },
     {
-        "merged": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\wreceipt_lo.xml",
-        "source": "D:\\java\\Proyectos\\LOTRADING\\AppWarehouse_refactor\\app\\src\\main\\res\\menu\\wreceipt_lo.xml"
+        "merged": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "D:\\java\\Proyectos\\LOTRADING\\appWarehouse_V2\\warehouse_refactor\\app\\src\\main\\res\\menu\\main.xml"
     }
 ]
